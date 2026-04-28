@@ -2,7 +2,7 @@
     <nav class="navbar navbar-expand-lg navbar-custom py-3">
         <div class="container">
             <a class="navbar-brand fw-bold mb-0 h1 d-flex align-items-center" href="{{ route('home') }}">
-                <img src="{{ asset('images/logo-rounded.png') }}" alt="GFG Logo" class="logo-img logo-rounded">
+                <img src="{{ asset('images/logo-rounded.png') }}" alt="{{ __('Logo GFG') }}" class="logo-img logo-rounded">
                 <span class="brand-font d-none d-sm-inline p-2" style="letter-spacing: -0.5px;">{{ __('Guide Gluten-Free') }}</span>
             </a>
 
@@ -42,13 +42,13 @@
                         <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 glass mt-2"
                             style="border-radius: 12px;">
                             <li><a class="dropdown-item py-2" style="color: var(--text-main);"
-                                    href="{{ route('lang.switch', 'fr') }}">🇫🇷 Français</a></li>
+                                    href="{{ route('lang.switch', 'fr') }}">{{ __('🇫🇷 Français') }}</a></li>
                             <li><a class="dropdown-item py-2" style="color: var(--text-main);"
-                                    href="{{ route('lang.switch', 'ar') }}">🇲🇦 العربية</a></li>
+                                    href="{{ route('lang.switch', 'ar') }}">{{ __('🇲🇦 العربية') }}</a></li>
                             <li><a class="dropdown-item py-2" style="color: var(--text-main);"
-                                    href="{{ route('lang.switch', 'en') }}">🇬🇧 English</a></li>
+                                    href="{{ route('lang.switch', 'en') }}">{{ __('🇬🇧 English') }}</a></li>
                             <li><a class="dropdown-item py-2" style="color: var(--text-main);"
-                                    href="{{ route('lang.switch', 'es') }}">🇪🇸 Español</a></li>
+                                    href="{{ route('lang.switch', 'es') }}">{{ __('🇪🇸 Español') }}</a></li>
                         </ul>
                     </div>
 

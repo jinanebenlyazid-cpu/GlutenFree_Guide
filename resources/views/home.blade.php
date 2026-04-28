@@ -23,7 +23,7 @@
                     <a href="{{ route('products.index') }}" class="btn btn-main px-4 py-3 shadow-md">
                         <i class="fas fa-search me-2"></i>{{ __('Explorer les produits') }}
                     </a>
-                    <a href="{{ route('locations.index') }}" class="btn btn-outline-secondary px-4 py-3 rounded-pill glass border-color fw-bold">
+                    <a href="{{ route('locations.index') }}" class="btn btn-outline-secondary px-4 py-3 rounded-pill  border-color fw-bold">
                         <i class="fas fa-map-marker-alt me-2" style="color: var(--btn-bg);"></i>{{ __('Voir la carte') }}
                     </a>
                 </div>
@@ -125,7 +125,7 @@
             <div class="col-lg-5 mb-5 mb-lg-0 pe-lg-5" data-aos="fade-right">
                 <span class="badge bg-soft text-main px-3 py-2 rounded-pill mb-3 border border-color">{{ __('Mode d\'emploi ✨') }}</span>
                 <h2 class="brand-font fw-bold mb-4 display-5">{{ __('Naviguez & Participez') }}</h2>
-                <p class="opacity-75 mb-5 fs-5">{{ __('Le Guide Gluten-Free est collabratif. Chacun peut aider des milliers de cœliaques à mieux manger au quotidien.') }}</p>
+                <p class="opacity-75 mb-5 fs-5">{{ __('Le Guide Gluten-Free est collaboratif. Chacun peut aider des milliers de cœliaques à mieux manger au quotidien.') }}</p>
                 
                 @php
                     $steps = [

@@ -103,7 +103,7 @@
             <div class="col-lg-7 ps-lg-5 mt-4 mt-lg-0">
                 <h2 class="brand-font fw-bold mb-4 display-5">{{ __('Qui sommes-nous ?') }}</h2>
                 <p class="opacity-75 mb-4 fs-5">
-                    {{ __('Ce site est le fruit d\'un travail passionné réalisé par Jinane & Iman dans le cadre de leur projet de fin de formation (PFF).') }}
+                    {{ __('Ce site est le fruit d\'un travail passionné réalisé par Jinane & Iman dans le cadre de leur projet de fin de formation (PFE).') }}
                 </p>
                 <div class="p-4 bg-soft rounded-4 border border-color mb-4 glass shadow-inner">
                     <div class="d-flex align-items-start gap-4">

@@ -124,7 +124,7 @@
                                     <img src="https://ui-avatars.com/api/?name={{ urlencode($recipe->user->name ?? 'User') }}&background=6b8e23&color=fff" class="rounded-circle shadow-sm" width="32" height="32">
                                     <div>
                                         <small class="d-block opacity-50">{{ __('Par') }}</small>
-                                        <span class="small fw-bold text-main">{{ $recipe->user->name ?? 'Communauté' }}</span>
+                                        <span class="small fw-bold text-main">{{ $recipe->user->name ?? __('Communauté') }}</span>
                                     </div>
                                 </div>
                                 

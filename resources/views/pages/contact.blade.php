@@ -38,7 +38,7 @@
                         </div>
                         <div>
                             <h6 class="mb-0 fw-bold">{{ __('Adresse') }}</h6>
-                            <p class="mb-0 opacity-75 small">Tanger, Maroc</p>
+                            <p class="mb-0 opacity-75 small">{{ __('Tanger, Maroc') }}</p>
                         </div>
                     </div>
                 </div>

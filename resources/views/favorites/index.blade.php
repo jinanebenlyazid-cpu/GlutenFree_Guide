@@ -43,12 +43,12 @@
                                     </div>
                                     <div class="card-body d-flex flex-column border-top border-color">
                                         <div class="mb-2">
-                                            <span class="badge bg-soft text-main border border-color px-2 py-1">{{ $product->category }}</span>
+                                            <span class="badge bg-soft text-main border border-color px-2 py-1">{{ __($product->category) }}</span>
                                         </div>
-                                        <h5 class="fw-bold brand-font mb-2 text-main">{{ $product->name }}</h5>
-                                        <p class="small opacity-75 mb-3 flex-grow-1 text-main">{{ Str::limit($product->description, 60) }}</p>
+                                        <h5 class="fw-bold brand-font mb-2 text-main">{{ __($product->name) }}</h5>
+                                        <p class="small opacity-75 mb-3 flex-grow-1 text-main">{{ __(Str::limit($product->description, 60)) }}</p>
                                         <div class="d-flex justify-content-between align-items-center mt-auto pt-2">
-                                            <span class="fw-bold fs-5 text-success">{{ number_format($product->price, 2) }} DH</span>
+                                            <span class="fw-bold fs-5 text-success">{{ number_format($product->price, 2) }} {{ __('DH') }}</span>
                                             <div class="d-flex gap-2">
                                                 <form action="{{ route('favorites.toggle') }}" method="POST" class="favorite-toggle-form">
                                                     @csrf
@@ -94,7 +94,7 @@
                                             </form>
                                         </div>
                                         <div class="position-absolute bottom-0 start-0 w-100 p-3 z-1 text-white" style="background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);">
-                                            <h5 class="fw-bold brand-font mb-1">{{ $recipe->name }}</h5>
+                                            <h5 class="fw-bold brand-font mb-1">{{ __($recipe->name) }}</h5>
                                             <div class="d-flex align-items-center small gap-3">
                                                 <span><i class="fas fa-clock text-warning me-1"></i> {{ $recipe->prep_time }} {{ __('min') }}</span>
                                             </div>
@@ -103,7 +103,7 @@
                                     <div class="card-body p-4 d-flex flex-column bg-white-adaptive">
                                         <div class="d-flex align-items-center gap-2 mb-3">
                                             <img src="https://ui-avatars.com/api/?name={{ urlencode($recipe->user->name ?? 'User') }}&background=6b8e23&color=fff" class="rounded-circle" width="24" height="24">
-                                            <span class="small opacity-75 fw-bold text-main">{{ $recipe->user->name ?? 'Communauté' }}</span>
+                                            <span class="small opacity-75 fw-bold text-main">{{ $recipe->user->name ?? __('Communauté') }}</span>
                                         </div>
                                         <button class="btn btn-main w-100 rounded-pill btn-sm mt-auto" data-bs-toggle="modal" data-bs-target="#recipeModal{{ $recipe->id }}">
                                             {{ __('Voir la recette') }}
@@ -133,7 +133,7 @@
             <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
                 <div class="modal-content card-custom border-0 shadow-lg" style="border-radius: 24px;">
                     <div class="modal-header border-0 pb-0 px-4 pt-4">
-                        <h4 class="fw-bold brand-font mb-0 text-main" id="productTitle{{ $product->id }}">{{ $product->name }}</h4>
+                        <h4 class="fw-bold brand-font mb-0 text-main" id="productTitle{{ $product->id }}">{{ __($product->name) }}</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body p-4">
@@ -144,12 +144,12 @@
                                 </div>
                             </div>
                             <div class="col-md-7">
-                                <h3 class="fw-bold text-success mb-3">{{ number_format($product->price, 2) }} DH</h3>
-                                <p class="opacity-75 mb-4 text-main fs-6">{{ $product->description }}</p>
+                                <h3 class="fw-bold text-success mb-3">{{ number_format($product->price, 2) }} {{ __('DH') }}</h3>
+                                <p class="opacity-75 mb-4 text-main fs-6">{{ __($product->description) }}</p>
                                 @if($product->ingredients)
                                     <div class="p-4 rounded-4 border border-color bg-soft text-start shadow-sm">
                                         <strong class="brand-font d-block mb-2 text-main"><i class="fas fa-layer-group me-2 text-success"></i>{{ __('Ingrédients') }}</strong>
-                                        <p class="small text-main mb-0 lh-base">{{ $product->ingredients }}</p>
+                                        <p class="small text-main mb-0 lh-base">{{ __($product->ingredients) }}</p>
                                     </div>
                                 @endif
                             </div>
@@ -169,7 +169,7 @@
                         <div class="col-md-5 d-none d-md-block" style="background: url('{{ asset($recipe->image_url ?? 'images/default-recipe.jpg') }}') center/cover;"></div>
                         <div class="col-md-7">
                             <div class="modal-header border-0 pb-0 pt-4 px-4">
-                                <h3 class="modal-title fw-bold brand-font text-main" id="recipeTitle{{ $recipe->id }}" style="color: var(--btn-bg) !important;">{{ $recipe->name }}</h3>
+                                <h3 class="modal-title fw-bold brand-font text-main" id="recipeTitle{{ $recipe->id }}" style="color: var(--btn-bg) !important;">{{ __($recipe->name) }}</h3>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body p-4">
