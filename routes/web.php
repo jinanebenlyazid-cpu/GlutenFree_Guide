@@ -98,4 +98,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/products/{product}/edit', [\App\Http\Controllers\AdminController::class, 'productEdit'])->name('admin.products.edit');
     Route::put('/products/{product}', [\App\Http\Controllers\AdminController::class, 'productUpdate'])->name('admin.products.update');
     Route::delete('/products/{product}', [\App\Http\Controllers\AdminController::class, 'productDestroy'])->name('admin.products.destroy');
+
+    // Users Management
+    Route::get('/users', [\App\Http\Controllers\AdminController::class, 'usersIndex'])->name('admin.users.index');
+    Route::get('/users/{user}', [\App\Http\Controllers\AdminController::class, 'usersShow'])->name('admin.users.show');
+    Route::patch('/users/{user}/toggle-block', [\App\Http\Controllers\AdminController::class, 'toggleBlockUser'])->name('admin.users.toggle-block');
 });

@@ -15,10 +15,13 @@
             <div class="col-md-6 text-md-end mt-3 mt-md-0">
                 <div class="d-flex gap-2 justify-content-md-end">
                     <a href="{{ route('admin.products.index') }}" class="btn btn-outline-primary rounded-pill px-4 btn-sm fw-bold">
-                        <i class="fas fa-tasks me-2"></i> {{ __('Gérer les Produits') }}
+                        <i class="fas fa-box me-2"></i> {{ __('Produits') }}
                     </a>
                     <a href="{{ route('admin.recipes.index') }}" class="btn btn-outline-primary rounded-pill px-4 btn-sm fw-bold">
-                        <i class="fas fa-tasks me-2"></i> {{ __('Gérer les Recettes') }}
+                        <i class="fas fa-utensils me-2"></i> {{ __('Recettes') }}
+                    </a>
+                    <a href="{{ route('admin.users.index') }}" class="btn btn-outline-primary rounded-pill px-4 btn-sm fw-bold">
+                        <i class="fas fa-users me-2"></i> {{ __('Utilisateurs') }}
                     </a>
                 </div>
             </div>

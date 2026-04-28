@@ -158,4 +158,39 @@ class AdminController extends Controller
         $product->delete();
         return back()->with('success', __('Produit supprimé avec succès !'));
     }
+
+    // --- Users Management ---
+
+    public function usersIndex(Request $request)
+    {
+        $query = \App\Models\User::query();
+        
+        if ($request->has('search') && $request->search != '') {
+            $query->where('name', 'like', '%' . $request->search . '%')
+                  ->orWhere('email', 'like', '%' . $request->search . '%');
+        }
+        
+        $users = $query->latest()->paginate(10)->appends($request->all());
+        
+        return view('admin.users.index', compact('users'));
+    }
+
+    public function usersShow(\App\Models\User $user)
+    {
+        $user->loadCount(['recipes', 'locations', 'comments', 'favorites']);
+        $user->load(['recipes' => function($q) { $q->latest()->take(5); }]);
+        return view('admin.users.show', compact('user'));
+    }
+
+    public function toggleBlockUser(\App\Models\User $user)
+    {
+        if ($user->id === auth()->id()) {
+            return back()->with('error', __('Vous ne pouvez pas vous bloquer vous-même.'));
+        }
+        
+        $user->update(['is_blocked' => !$user->is_blocked]);
+        
+        $message = $user->is_blocked ? __('Utilisateur bloqué avec succès.') : __('Utilisateur débloqué avec succès.');
+        return back()->with('success', $message);
+    }
 }
