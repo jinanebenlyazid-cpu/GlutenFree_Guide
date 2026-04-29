@@ -240,14 +240,16 @@
     });
 
     // Global Favorite Toggle AJAX
-    document.addEventListener('click', function(e) {
-        const form = e.target.closest('.favorite-toggle-form');
-        if (form) {
+    document.addEventListener('submit', function(e) {
+        if (e.target.classList && e.target.classList.contains('favorite-toggle-form')) {
             e.preventDefault();
-            const btn = form.querySelector('button');
-            const icon = btn.querySelector('i');
+            const form = e.target;
+            const btn = form.querySelector('button[type="submit"]') || form.querySelector('button');
+            const icon = btn ? btn.querySelector('i') : null;
             const formData = new FormData(form);
             const url = form.action;
+
+            if (btn) btn.disabled = true;
 
             fetch(url, {
                 method: 'POST',
@@ -260,11 +262,23 @@
             .then(res => res.json())
             .then(data => {
                 if (data.status === 'added') {
-                    icon.classList.remove('far');
-                    icon.classList.add('fas');
-                } else {
-                    icon.classList.remove('fas');
-                    icon.classList.add('far');
+                    if (icon) {
+                        icon.classList.remove('far');
+                        icon.classList.add('fas');
+                    }
+                    // If there's text in the button, update it
+                    if (btn && btn.textContent.includes('Ajouter aux favoris')) {
+                        btn.innerHTML = '<i class="fas fa-heart me-2"></i>Retirer des favoris';
+                    }
+                } else if (data.status === 'removed') {
+                    if (icon) {
+                        icon.classList.remove('fas');
+                        icon.classList.add('far');
+                    }
+                    // If there's text in the button, update it
+                    if (btn && btn.textContent.includes('Retirer des favoris')) {
+                        btn.innerHTML = '<i class="far fa-heart me-2"></i>Ajouter aux favoris';
+                    }
                     
                     // Specific behavior for favorites page: hide the card
                     if (window.location.pathname.includes('/favorites')) {
@@ -276,16 +290,27 @@
                             setTimeout(() => {
                                 cardColumn.remove();
                                 // Check if tab is now empty
-                                const tabPane = form.closest('.tab-pane');
+                                const tabPane = form.closest('.tab-pane') || document.querySelector('.row.g-4');
                                 if (tabPane && tabPane.querySelectorAll('.card').length === 0) {
                                     location.reload(); // Quick way to show "No favorites" message
                                 }
                             }, 400);
                         }
                     }
+                } else if (data.status === 'error') {
+                    // Show login prompt if unauthenticated
+                    alert(data.message);
                 }
             })
-            .catch(err => console.error(err));
+            .catch(err => {
+                console.error(err);
+                if (err.status === 401) {
+                    window.location.href = '/login';
+                }
+            })
+            .finally(() => {
+                if (btn) btn.disabled = false;
+            });
         }
     });
 

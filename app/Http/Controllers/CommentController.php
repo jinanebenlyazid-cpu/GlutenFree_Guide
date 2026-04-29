@@ -11,6 +11,13 @@ class CommentController extends Controller
 {
     public function store(Request $request, Recipe $recipe)
     {
+        if (!Auth::check()) {
+            if ($request->ajax() || $request->wantsJson()) {
+                return response()->json(['success' => false, 'message' => __('Veuillez vous connecter pour commenter.')], 401);
+            }
+            return redirect()->route('login');
+        }
+
         $request->validate([
             'body' => 'required|string|max:1000',
         ]);

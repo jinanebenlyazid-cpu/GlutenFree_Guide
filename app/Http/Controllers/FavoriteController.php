@@ -27,6 +27,13 @@ class FavoriteController extends Controller
 
     public function toggle(Request $request)
     {
+        if (!Auth::check()) {
+            if ($request->ajax() || $request->wantsJson()) {
+                return response()->json(['status' => 'error', 'message' => __('Veuillez vous connecter.')], 401);
+            }
+            return redirect()->route('login');
+        }
+
         $request->validate([
             'id' => 'required|integer',
             'type' => 'required|string|in:product,recipe',

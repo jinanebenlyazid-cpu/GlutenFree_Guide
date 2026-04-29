@@ -56,15 +56,17 @@ Route::resource('recipes', RecipeController::class);
 // Favorites & User Resources
 Route::middleware(['auth'])->group(function () {
     Route::get('/favorites', [\App\Http\Controllers\FavoriteController::class, 'index'])->name('favorites.index');
-    Route::post('/favorites/toggle', [\App\Http\Controllers\FavoriteController::class, 'toggle'])->name('favorites.toggle');
     Route::get('/my-recipes', [RecipeController::class, 'myRecipes'])->name('recipes.my');
 
     // Challenges
     Route::get('/daily-challenge', [\App\Http\Controllers\ChallengeController::class, 'getDailyChallenge'])->name('challenge.daily');
 });
 
-// Comments (Auth only)
-Route::post('/recipes/{recipe}/comments', [CommentController::class, 'store'])->name('comments.store')->middleware('auth');
+// Moved outside middleware to handle unauthenticated AJAX cleanly
+Route::post('/favorites/toggle', [\App\Http\Controllers\FavoriteController::class, 'toggle'])->name('favorites.toggle');
+
+// Comments
+Route::post('/recipes/{recipe}/comments', [CommentController::class, 'store'])->name('comments.store');
 Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy')->middleware('auth');
 
 // Language Switch
