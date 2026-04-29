@@ -130,11 +130,30 @@
     .hover-up:hover { transform: translateY(-15px); box-shadow: 0 40px 80px rgba(0,0,0,0.1) !important; border-color: var(--btn-bg) !important; }
     .bg-danger-soft { background: rgba(220, 53, 69, 0.05); }
     .bg-success-soft { background: rgba(25, 135, 84, 0.05); }
-    .step-num { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0; }
     .highlight-card { transition: 0.3s; }
     .highlight-card:hover { background: var(--card-bg); transform: scale(1.02); }
     .cta-pulse { position: absolute; width: 100px; height: 100px; background: var(--btn-bg); opacity: 0.1; border-radius: 50%; top: -20px; right: -20px; animation: pulse 2s infinite; }
     @keyframes pulse { 0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(107, 142, 35, 0.7); } 70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(107, 142, 35, 0); } 100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(107, 142, 35, 0); } }
     .transition-grow:hover { transform: scale(1.05); }
+
+    .icon-circle {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 20px;
+        }
+        .step-num {
+            width: 50px;
+            height: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
 </style>
 @endsection
