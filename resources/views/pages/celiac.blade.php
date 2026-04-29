@@ -1,7 +1,6 @@
 @extends('main')
 
 @section('title', __('Comprendre la Maladie Cœliaque - Guide Gluten-Free'))
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 @section('content')
 <section class="section pt-5 mt-5 position-relative overflow-hidden">
     <div class="circles-bg"></div>
@@ -75,7 +74,7 @@
                     <p class="opacity-75 fs-5 mb-4">{{ __('Le parcours classique en deux étapes cruciales :') }}</p>
                     <div class="step-card d-flex gap-4 p-4 bg-white-adaptive rounded-4 border border-color shadow-sm mb-4">
                         <div class="step-num bg-main text-white">
-                            <i class="fas fa-vial"></i>
+                            <i class="fa-solid fa-vial"></i>
                         </div>
                         <div>
                             <h6 class="fw-bold text-main mb-1">{{ __('Sérologie') }}</h6>
@@ -84,7 +83,7 @@
                     </div>
                     <div class="step-card d-flex gap-4 p-4 bg-white-adaptive rounded-4 border border-color shadow-sm">
                         <div class="step-num bg-main text-white">
-                            <i class="fas fa-microscope"></i>
+                            <i class="fa-solid fa-microscope"></i>
                         </div>
                         <div>
                             <h6 class="fw-bold text-main mb-1">{{ __('Biopsie') }}</h6>
