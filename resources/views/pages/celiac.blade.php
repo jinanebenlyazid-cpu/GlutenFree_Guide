@@ -16,7 +16,7 @@
                 </p>
                 <div class="p-4 bg-white-adaptive border border-color rounded-5 shadow-2xl glass mb-4">
                     <div class="d-flex gap-4">
-                        <div class="icon-circle bg-main text-white p-3 shadow-lg"><i class="fas fa-question fs-4"></i></div>
+                        <div class="icon-circle bg-main  p-3 shadow-lg"><i class="fas fa-question fs-4"></i></div>
                         <div>
                             <h5 class="fw-bold mb-2">{{ __('C\'est quoi exactement ?') }}</h5>
                             <p class="small opacity-75 mb-0">
@@ -73,18 +73,16 @@
                     <h2 class="brand-font fw-bold mb-4">{{ __('Le Diagnostic') }}</h2>
                     <p class="opacity-75 fs-5 mb-4">{{ __('Le parcours classique en deux étapes cruciales :') }}</p>
                     <div class="step-card d-flex gap-4 p-4 bg-white-adaptive rounded-4 border border-color shadow-sm mb-4">
-                        <div class="step-num bg-main text-white">
-                            <i class="fa-solid fa-vial"></i>
-                        </div>
+                        <div class="step-num bg-main text-white">🧪</div>
+
                         <div>
                             <h6 class="fw-bold text-main mb-1">{{ __('Sérologie') }}</h6>
                             <p class="small opacity-75 mb-0">{{ __('Recherche d\'anticorps anti-transglutaminase par prise de sang.') }}</p>
                         </div>
                     </div>
                     <div class="step-card d-flex gap-4 p-4 bg-white-adaptive rounded-4 border border-color shadow-sm">
-                        <div class="step-num bg-main text-white">
-                            <i class="fa-solid fa-microscope"></i>
-                        </div>
+                        <div class="step-num bg-main text-white">🔬</div>
+
                         <div>
                             <h6 class="fw-bold text-main mb-1">{{ __('Biopsie') }}</h6>
                             <p class="small opacity-75 mb-0">{{ __('Confirmation par prélèvement au niveau de l\'intestin grêle.') }}</p>
