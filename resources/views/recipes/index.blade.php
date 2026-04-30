@@ -160,7 +160,18 @@
                                             <div class="mb-3 p-2 rounded-3 bg-body-tertiary shadow-xs" style="font-size: 0.8rem;" id="comment-{{ $comment->id }}">
                                                 <div class="d-flex justify-content-between mb-1">
                                                     <span class="fw-bold text-main">{{ $comment->user->name ?? '?' }}</span>
-                                                    <span class="opacity-50" style="font-size: 0.7rem;">{{ $comment->created_at->diffForHumans() }}</span>
+                                                    <div class="d-flex align-items-center gap-2">
+                                                        <span class="opacity-50" style="font-size: 0.7rem;">{{ $comment->created_at->diffForHumans() }}</span>
+                                                        @if(Auth::check() && Auth::id() === $comment->user_id)
+                                                            <form action="{{ route('comments.destroy', $comment->id) }}" method="POST" class="d-inline" onsubmit="return confirm('{{ __('Êtes-vous sûr de vouloir supprimer ce commentaire ?') }}');">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" class="btn btn-link text-danger p-0 border-0" style="font-size: 0.7rem;" title="{{ __('Supprimer') }}">
+                                                                    <i class="fas fa-trash-alt"></i>
+                                                                </button>
+                                                            </form>
+                                                        @endif
+                                                    </div>
                                                 </div>
                                                 <p class="mb-0 opacity-75">{{ __($comment->body) }}</p>
                                             </div>
@@ -268,7 +279,18 @@
                                             <div class="mb-3 p-3 rounded-4 bg-soft" style="font-size: 0.85rem;" id="modal-comment-{{ $comment->id }}">
                                                 <div class="d-flex justify-content-between mb-1">
                                                     <span class="fw-bold text-main">{{ $comment->user->name }}</span>
-                                                    <span class="small opacity-50">{{ $comment->created_at->diffForHumans() }}</span>
+                                                    <div class="d-flex align-items-center gap-2">
+                                                        <span class="small opacity-50">{{ $comment->created_at->diffForHumans() }}</span>
+                                                        @if(Auth::check() && Auth::id() === $comment->user_id)
+                                                            <form action="{{ route('comments.destroy', $comment->id) }}" method="POST" class="d-inline" onsubmit="return confirm('{{ __('Êtes-vous sûr de vouloir supprimer ce commentaire ?') }}');">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" class="btn btn-link text-danger p-0 border-0" style="font-size: 0.85rem;" title="{{ __('Supprimer') }}">
+                                                                    <i class="fas fa-trash-alt"></i>
+                                                                </button>
+                                                            </form>
+                                                        @endif
+                                                    </div>
                                                 </div>
                                                 <p class="mb-0 text-main opacity-75">{{ __($comment->body) }}</p>
                                             </div>
@@ -367,7 +389,18 @@ document.addEventListener('DOMContentLoaded', function() {
                         <div class="mb-3 p-2 rounded-3 bg-body-tertiary shadow-xs" style="font-size: 0.8rem;" id="comment-${c.id}">
                             <div class="d-flex justify-content-between mb-1">
                                 <span class="fw-bold text-main">${c.user_name}</span>
-                                <span class="opacity-50" style="font-size: 0.7rem;">${c.time}</span>
+                                <div class="d-flex align-items-center gap-2">
+                                    <span class="opacity-50" style="font-size: 0.7rem;">${c.time}</span>
+                                    ${c.can_delete ? `
+                                    <form action="${c.delete_url}" method="POST" class="d-inline" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce commentaire ?');">
+                                        <input type="hidden" name="_token" value="${csrfToken}">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <button type="submit" class="btn btn-link text-danger p-0 border-0" style="font-size: 0.7rem;" title="Supprimer">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </form>
+                                    ` : ''}
+                                </div>
                             </div>
                             <p class="mb-0 opacity-75">${c.body}</p>
                         </div>`;
@@ -377,7 +410,18 @@ document.addEventListener('DOMContentLoaded', function() {
                         <div class="mb-3 p-3 rounded-4 bg-soft" style="font-size: 0.85rem;" id="modal-comment-${c.id}">
                             <div class="d-flex justify-content-between mb-1">
                                 <span class="fw-bold text-main">${c.user_name}</span>
-                                <span class="small opacity-50">${c.time}</span>
+                                <div class="d-flex align-items-center gap-2">
+                                    <span class="small opacity-50">${c.time}</span>
+                                    ${c.can_delete ? `
+                                    <form action="${c.delete_url}" method="POST" class="d-inline" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce commentaire ?');">
+                                        <input type="hidden" name="_token" value="${csrfToken}">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <button type="submit" class="btn btn-link text-danger p-0 border-0" style="font-size: 0.85rem;" title="Supprimer">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </form>
+                                    ` : ''}
+                                </div>
                             </div>
                             <p class="mb-0 text-main opacity-75">${c.body}</p>
                         </div>`;
