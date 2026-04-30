@@ -237,7 +237,7 @@
     <main >
         <div class="container mb-4">
             @if(!request()->routeIs('home'))
-                <a href="javascript:history.back()" class="btn-back animate-fade-in pt-2">
+                <a href="javascript:history.back()" class="btn-back animate-fade-in pt-5">
                     <i class="fas fa-arrow-left"></i>
                     {{ __('Retour') }}
                 </a>
