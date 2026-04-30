@@ -17,29 +17,37 @@ class ProfileController extends Controller
 
     public function update(Request $request)
     {
-        $user = Auth::user();
+        try {
+            $user = Auth::user();
 
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
-            'profile_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+                'profile_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
 
-        $user->name = $request->name;
-        $user->email = $request->email;
+            $user->name = $request->name;
+            $user->email = $request->email;
 
-        if ($request->hasFile('profile_photo')) {
-            // Delete old photo if exists
-            if ($user->profile_photo_path) {
-                Storage::disk('public')->delete($user->profile_photo_path);
+            if ($request->hasFile('profile_photo')) {
+                // Delete old photo if exists
+                if ($user->profile_photo_path) {
+                    Storage::disk('public')->delete($user->profile_photo_path);
+                }
+
+                $path = $request->file('profile_photo')->store('profile-photos', 'public');
+                $user->profile_photo_path = $path;
             }
 
-            $path = $request->file('profile_photo')->store('profile-photos', 'public');
-            $user->profile_photo_path = $path;
+            $user->save();
+
+            return back()->with('success', __('Profil mis à jour avec succès.'));
+        } catch (\Throwable $e) {
+            \Illuminate\Support\Facades\Log::error('Profile Update Error: ' . $e->getMessage(), [
+                'exception' => $e,
+                'request' => $request->all()
+            ]);
+            return back()->with('error', __('Une erreur est survenue lors de la mise à jour du profil : ') . $e->getMessage());
         }
-
-        $user->save();
-
-        return back()->with('success', __('Profil mis à jour avec succès.'));
     }
 }

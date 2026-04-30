@@ -32,7 +32,6 @@
                     </div>
                 </div>
             </div>
-        @endif
 
         @if ($errors->any())
             <div class="row mb-4" data-aos="fade-up">

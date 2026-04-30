@@ -62,7 +62,7 @@ class User extends Authenticatable
     public function getProfilePhotoUrlAttribute()
     {
         if ($this->profile_photo_path) {
-            return \Illuminate\Support\Facades\Storage::url($this->profile_photo_path);
+            return asset('storage/' . $this->profile_photo_path);
         }
 
         return 'https://ui-avatars.com/api/?name=' . urlencode($this->name) . '&background=6b8e23&color=fff';
