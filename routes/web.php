@@ -7,6 +7,7 @@ use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,8 +63,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/daily-challenge', [\App\Http\Controllers\ChallengeController::class, 'getDailyChallenge'])->name('challenge.daily');
 
     // Profile
-    Route::get('/profile', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
-    Route::post('/profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+    Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
 });
 
 // Moved outside middleware to handle unauthenticated AJAX cleanly
