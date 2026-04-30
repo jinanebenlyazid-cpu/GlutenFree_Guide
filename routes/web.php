@@ -106,4 +106,4 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/users/{user}', [\App\Http\Controllers\AdminController::class, 'usersShow'])->name('admin.users.show');
     Route::patch('/users/{user}/toggle-block', [\App\Http\Controllers\AdminController::class, 'toggleBlockUser'])->name('admin.users.toggle-block');
 });
-});
+
