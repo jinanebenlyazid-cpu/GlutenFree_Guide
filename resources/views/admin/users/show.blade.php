@@ -34,8 +34,8 @@
             <!-- User Profile Sidebar -->
             <div class="col-xl-4">
                 <div class="card card-custom border-0 shadow-sm text-center p-4">
-                    <div class="rounded-circle d-flex justify-content-center align-items-center fw-bold text-white shadow-sm mx-auto mb-3" style="width: 100px; height: 100px; font-size: 2.5rem; background-color: var(--btn-bg);">
-                        {{ strtoupper(substr($user->name, 0, 1)) }}
+                    <div class="rounded-circle d-flex justify-content-center align-items-center fw-bold shadow-sm mx-auto mb-3" style="width: 100px; height: 100px; background-color: var(--bg-soft);">
+                        <img src="{{ $user->profile_photo_url }}" class="rounded-circle" style="width: 100%; height: 100%; object-fit: cover;" alt="{{ $user->name }}">
                     </div>
                     <h3 class="fw-bold mb-1" style="color: var(--text-main);">{{ $user->name }}</h3>
                     <p class="opacity-75 mb-3">{{ $user->email }}</p>

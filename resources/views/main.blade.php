@@ -234,10 +234,10 @@
 
     @include('header')
 
-    <main style="">
+    <main >
         <div class="container mb-4">
             @if(!request()->routeIs('home'))
-                <a href="javascript:history.back()" class="btn-back animate-fade-in">
+                <a href="javascript:history.back()" class="btn-back animate-fade-in pt-2">
                     <i class="fas fa-arrow-left"></i>
                     {{ __('Retour') }}
                 </a>
@@ -321,8 +321,8 @@
                                 icon.classList.add('fas');
                             }
                             // If there's text in the button, update it
-                            if (btn && btn.textContent.includes('Ajouter aux favoris')) {
-                                btn.innerHTML = '<i class="fas fa-heart me-2"></i>Retirer des favoris';
+                            if (btn && btn.textContent.includes('{{ __('Ajouter aux favoris') }}')) {
+                                btn.innerHTML = '<i class="fas fa-heart me-2"></i>{{ __('Retirer des favoris') }}';
                             }
                         } else if (data.status === 'removed') {
                             if (icon) {
@@ -330,8 +330,8 @@
                                 icon.classList.add('far');
                             }
                             // If there's text in the button, update it
-                            if (btn && btn.textContent.includes('Retirer des favoris')) {
-                                btn.innerHTML = '<i class="far fa-heart me-2"></i>Ajouter aux favoris';
+                            if (btn && btn.textContent.includes('{{ __('Retirer des favoris') }}')) {
+                                btn.innerHTML = '<i class="far fa-heart me-2"></i>{{ __('Ajouter aux favoris') }}';
                             }
 
                             // Specific behavior for favorites page: hide the card

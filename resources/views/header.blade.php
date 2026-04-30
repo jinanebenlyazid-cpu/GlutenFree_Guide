@@ -62,11 +62,11 @@
 
                     @auth
                         <div class="dropdown">
-                            <button class="btn btn-main d-flex align-items-center gap-2" type="button"
+                            <button class="btn btn-main d-flex align-items-center gap-2 p-1 pe-3 rounded-pill" type="button"
                                 data-bs-toggle="dropdown">
-                                <i class="fas fa-user-circle fs-5"></i>
-                                <span class="d-none d-sm-inline">{{ Auth::user()->name }}</span>
-                                <i class="fas fa-chevron-down small opacity-50"></i>
+                                <img src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" class="rounded-circle" style="width: 32px; height: 32px; object-fit: cover;">
+                                <span class="d-none d-sm-inline fw-bold">{{ Auth::user()->name }}</span>
+                                <i class="fas fa-chevron-down small opacity-50 ms-1"></i>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 glass mt-3 animate-fade-in"
                                 style="border-radius: 16px; min-width: 240px; padding: 12px;">
@@ -86,6 +86,11 @@
                                     </li>
                                 @endif
 
+                                <li>
+                                    <a class="dropdown-item rounded-3 py-2 fw-bold" href="{{ route('profile.show') }}">
+                                        <i class="fas fa-user-edit me-2 text-primary opacity-75"></i> {{ __('Mon Profil') }}
+                                    </a>
+                                </li>
                                 <li>
                                     <a class="dropdown-item rounded-3 py-2" href="{{ route('favorites.index') }}">
                                         <i class="fas fa-heart me-2 opacity-50 text-danger"></i> {{ __('Mes Favoris') }}

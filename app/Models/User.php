@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-#[Fillable(['name', 'email', 'password', 'is_blocked'])]
+#[Fillable(['name', 'email', 'password', 'is_blocked', 'profile_photo_path'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
@@ -57,5 +57,14 @@ class User extends Authenticatable
     public function isBlocked(): bool
     {
         return (bool) $this->is_blocked;
+    }
+
+    public function getProfilePhotoUrlAttribute()
+    {
+        if ($this->profile_photo_path) {
+            return \Illuminate\Support\Facades\Storage::url($this->profile_photo_path);
+        }
+
+        return 'https://ui-avatars.com/api/?name=' . urlencode($this->name) . '&background=6b8e23&color=fff';
     }
 }

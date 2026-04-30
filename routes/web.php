@@ -60,6 +60,10 @@ Route::middleware(['auth'])->group(function () {
 
     // Challenges
     Route::get('/daily-challenge', [\App\Http\Controllers\ChallengeController::class, 'getDailyChallenge'])->name('challenge.daily');
+
+    // Profile
+    Route::get('/profile', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
+    Route::post('/profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
 });
 
 // Moved outside middleware to handle unauthenticated AJAX cleanly

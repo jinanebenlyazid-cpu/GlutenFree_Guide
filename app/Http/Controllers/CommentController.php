@@ -36,7 +36,7 @@ class CommentController extends Controller
                     'id' => $comment->id,
                     'body' => $comment->body,
                     'user_name' => optional($comment->user)->name ?? __('Anonyme'),
-                    'user_initial' => strtoupper(substr(optional($comment->user)->name ?? 'A', 0, 1)),
+                    'user_photo_url' => optional($comment->user)->profile_photo_url ?? 'https://ui-avatars.com/api/?name=A&background=6b8e23&color=fff',
                     'time' => $comment->created_at->diffForHumans(),
                     'can_delete' => true,
                     'delete_url' => route('comments.destroy', $comment->id),
