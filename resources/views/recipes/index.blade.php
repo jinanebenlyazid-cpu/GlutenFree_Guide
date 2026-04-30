@@ -121,7 +121,7 @@
                             </div>
                             <div class="card-body p-4 d-flex flex-column">
                                 <div class="d-flex align-items-center gap-3 mb-4">
-                                    <img src="{{ $recipe->user ? $recipe->user->profile_photo_url : 'https://ui-avatars.com/api/?name='.urlencode($recipe->user->name ?? 'User').'&background=6b8e23&color=fff' }}" class="rounded-circle shadow-sm" width="32" height="32" style="object-fit: cover;">
+                                    <img src="https://ui-avatars.com/api/?name={{ urlencode($recipe->user->name ?? 'User') }}&background=6b8e23&color=fff" class="rounded-circle shadow-sm" width="32" height="32">
                                     <div>
                                         <small class="d-block opacity-50">{{ __('Par') }}</small>
                                         <span class="small fw-bold text-main">{{ $recipe->user->name ?? __('Communauté') }}</span>
@@ -159,10 +159,7 @@
                                         @forelse($recipe->comments->sortByDesc('created_at') as $comment)
                                             <div class="mb-3 p-2 rounded-3 bg-body-tertiary shadow-xs" style="font-size: 0.8rem;" id="comment-{{ $comment->id }}">
                                                 <div class="d-flex justify-content-between mb-1">
-                                                    <div class="d-flex align-items-center gap-2">
-                                                        <img src="{{ $comment->user ? $comment->user->profile_photo_url : 'https://ui-avatars.com/api/?name=A&background=6b8e23&color=fff' }}" class="rounded-circle" width="20" height="20" style="object-fit: cover;">
-                                                        <span class="fw-bold text-main">{{ $comment->user->name ?? '?' }}</span>
-                                                    </div>
+                                                    <span class="fw-bold text-main">{{ $comment->user->name ?? '?' }}</span>
                                                     <div class="d-flex align-items-center gap-2">
                                                         <span class="opacity-50" style="font-size: 0.7rem;">{{ $comment->created_at->diffForHumans() }}</span>
                                                         @if(Auth::check() && Auth::id() === $comment->user_id)
@@ -281,10 +278,7 @@
                                         @foreach($recipe->comments->sortByDesc('created_at') as $comment)
                                             <div class="mb-3 p-3 rounded-4 bg-soft" style="font-size: 0.85rem;" id="modal-comment-{{ $comment->id }}">
                                                 <div class="d-flex justify-content-between mb-1">
-                                                    <div class="d-flex align-items-center gap-2">
-                                                        <img src="{{ $comment->user ? $comment->user->profile_photo_url : 'https://ui-avatars.com/api/?name=A&background=6b8e23&color=fff' }}" class="rounded-circle" width="24" height="24" style="object-fit: cover;">
-                                                        <span class="fw-bold text-main">{{ $comment->user->name }}</span>
-                                                    </div>
+                                                    <span class="fw-bold text-main">{{ $comment->user->name }}</span>
                                                     <div class="d-flex align-items-center gap-2">
                                                         <span class="small opacity-50">{{ $comment->created_at->diffForHumans() }}</span>
                                                         @if(Auth::check() && Auth::id() === $comment->user_id)
@@ -394,10 +388,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     const cardCommentHtml = `
                         <div class="mb-3 p-2 rounded-3 bg-body-tertiary shadow-xs" style="font-size: 0.8rem;" id="comment-${c.id}">
                             <div class="d-flex justify-content-between mb-1">
-                                <div class="d-flex align-items-center gap-2">
-                                    <img src="${c.user_photo_url}" class="rounded-circle" width="20" height="20" style="object-fit: cover;">
-                                    <span class="fw-bold text-main">${c.user_name}</span>
-                                </div>
+                                <span class="fw-bold text-main">${c.user_name}</span>
                                 <div class="d-flex align-items-center gap-2">
                                     <span class="opacity-50" style="font-size: 0.7rem;">${c.time}</span>
                                     ${c.can_delete ? `
@@ -418,10 +409,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     const modalCommentHtml = `
                         <div class="mb-3 p-3 rounded-4 bg-soft" style="font-size: 0.85rem;" id="modal-comment-${c.id}">
                             <div class="d-flex justify-content-between mb-1">
-                                <div class="d-flex align-items-center gap-2">
-                                    <img src="${c.user_photo_url}" class="rounded-circle" width="24" height="24" style="object-fit: cover;">
-                                    <span class="fw-bold text-main">${c.user_name}</span>
-                                </div>
+                                <span class="fw-bold text-main">${c.user_name}</span>
                                 <div class="d-flex align-items-center gap-2">
                                     <span class="small opacity-50">${c.time}</span>
                                     ${c.can_delete ? `

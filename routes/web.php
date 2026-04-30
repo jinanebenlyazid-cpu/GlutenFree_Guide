@@ -7,7 +7,6 @@ use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PageController;
-use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,10 +60,6 @@ Route::middleware(['auth'])->group(function () {
 
     // Challenges
     Route::get('/daily-challenge', [\App\Http\Controllers\ChallengeController::class, 'getDailyChallenge'])->name('challenge.daily');
-
-    // Profile
-    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
-    Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
 });
 
 // Moved outside middleware to handle unauthenticated AJAX cleanly
@@ -110,4 +105,5 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/users', [\App\Http\Controllers\AdminController::class, 'usersIndex'])->name('admin.users.index');
     Route::get('/users/{user}', [\App\Http\Controllers\AdminController::class, 'usersShow'])->name('admin.users.show');
     Route::patch('/users/{user}/toggle-block', [\App\Http\Controllers\AdminController::class, 'toggleBlockUser'])->name('admin.users.toggle-block');
+});
 });
