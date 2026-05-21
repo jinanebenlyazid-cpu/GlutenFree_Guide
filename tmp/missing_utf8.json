@@ -1,0 +1,7 @@
+﻿
+Warning: foreach() argument must be of type array|object, null given in C:\Users\DELL 7400\Documents\projet\GuideGlutenFree\tmp\find_missing.php on line 7
+
+Call Stack:
+    0.0003     395160   1. {main}() C:\Users\DELL 7400\Documents\projet\GuideGlutenFree\tmp\find_missing.php:0
+
+[]
