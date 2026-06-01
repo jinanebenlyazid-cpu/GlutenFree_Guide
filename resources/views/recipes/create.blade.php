@@ -3,7 +3,7 @@
 @section('title', __('Partager une recette - Guide Gluten-Free'))
 
 @section('content')
-<section class="section py-5" style="background: linear-gradient(135deg, var(--bg-soft) 0%, #fff 100%); min-height: calc(100vh - 100px); position: relative;">
+<section class="section py-5 recipe-create-section">
     
     <!-- Decorative -->
     <div class="position-absolute top-0 end-0 opacity-10" style="transform: translate(20%, -20%);">
@@ -22,7 +22,7 @@
                             <h2 class="brand-font fw-bold text-main mb-2 fs-1">{{ __('Partager une recette') }} <i class="fas fa-mortar-pestle ms-2 text-success"></i></h2>
                             <p class="opacity-75 text-main fs-5 mb-4">{{ __('Inspirez la communauté avec vos créations culinaires sans gluten.') }}</p>
                             
-                            <div class="alert border-0 rounded-4 d-inline-flex align-items-center gap-2 px-4 py-3 shadow-sm bg-white" style="font-size: 0.9rem;">
+                            <div class="alert border-0 rounded-4 d-inline-flex align-items-center gap-2 px-4 py-3 shadow-sm recipe-create-notice" style="font-size: 0.9rem;">
                                 <i class="fas fa-shield-alt text-success fs-5"></i>
                                 <span class="text-main fw-bold">{{ __('Modération :') }}</span>
                                 <span class="text-main opacity-75">{{ __('Votre recette sera validée par notre équipe avant sa publication.') }}</span>
@@ -80,7 +80,7 @@
                             </div>
 
                             <!-- Section: Ingrédients -->
-                            <div class="mb-5 bg-white p-4 rounded-5 border border-color shadow-sm">
+                            <div class="mb-5 p-4 rounded-5 border border-color shadow-sm recipe-create-panel">
                                 <div class="d-flex justify-content-between align-items-center mb-4">
                                     <h5 class="fw-bold brand-font text-main mb-0"><i class="fas fa-shopping-basket me-2 text-success"></i>{{ __('Ingrédients') }}</h5>
                                     <button type="button" class="btn btn-soft-primary rounded-pill btn-sm px-3 fw-bold" id="add-ingredient">
@@ -97,7 +97,7 @@
                             </div>
 
                             <!-- Section: Étapes -->
-                            <div class="mb-5 bg-white p-4 rounded-5 border border-color shadow-sm">
+                            <div class="mb-5 p-4 rounded-5 border border-color shadow-sm recipe-create-panel">
                                 <div class="d-flex justify-content-between align-items-center mb-4">
                                     <h5 class="fw-bold brand-font text-main mb-0"><i class="fas fa-list-ol me-2 text-success"></i>{{ __('Étapes de préparation') }}</h5>
                                     <button type="button" class="btn btn-soft-primary rounded-pill btn-sm px-3 fw-bold" id="add-step">
@@ -131,12 +131,62 @@
 </section>
 
 <style>
+    .recipe-create-section {
+        background: linear-gradient(135deg, var(--bg-soft) 0%, var(--bg-body) 100%);
+        min-height: calc(100vh - 100px);
+        position: relative;
+    }
+
+    .recipe-create-notice,
+    .recipe-create-panel {
+        background: var(--card-bg);
+        color: var(--text-main);
+    }
+
+    .recipe-create-panel .ingredient-row,
+    .recipe-create-panel .step-row {
+        background: var(--bg-body);
+    }
+
+    .recipe-create-panel .form-control,
+    .recipe-create-panel textarea {
+        color: var(--text-main);
+    }
+
+    .recipe-create-panel .form-control::placeholder,
+    .recipe-create-panel textarea::placeholder {
+        color: color-mix(in srgb, var(--text-main) 55%, transparent);
+        opacity: 1;
+    }
+
     .glass-input:focus-within { border-color: var(--btn-bg) !important; box-shadow: 0 0 15px rgba(107, 142, 35, 0.1) !important; background: rgba(255,255,255,0.9); }
     .btn-soft-primary { background: var(--bg-soft); color: var(--btn-bg); border: none; }
     .btn-soft-primary:hover { background: var(--btn-bg); color: #fff; }
     .shadow-xs { box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
     .shadow-inner { box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); }
     .transform-hover:hover { transform: translateY(-3px); }
+
+    [data-bs-theme="dark"] .recipe-create-notice,
+    [data-bs-theme="dark"] .recipe-create-panel {
+        background: #1a1f1a;
+        border-color: #314031 !important;
+        box-shadow: 0 18px 44px rgba(0, 0, 0, 0.32) !important;
+    }
+
+    [data-bs-theme="dark"] .recipe-create-panel .ingredient-row,
+    [data-bs-theme="dark"] .recipe-create-panel .step-row {
+        background: #0f130f;
+        border-color: #3b483b !important;
+    }
+
+    [data-bs-theme="dark"] .recipe-create-panel .input-group-text.bg-soft {
+        background: #0a0c0a !important;
+        color: #f3f7f1 !important;
+    }
+
+    [data-bs-theme="dark"] .glass-input:focus-within {
+        background: #101510;
+    }
 </style>
 
 <script>
