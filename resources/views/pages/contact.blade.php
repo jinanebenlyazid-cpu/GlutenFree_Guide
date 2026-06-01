@@ -7,7 +7,9 @@
     <div class="container">
         <div class="row align-items-center mb-5">
             <div class="col-lg-6 mb-5 mb-lg-0" data-aos="fade-right">
-                <span class="badge bg-soft text-main px-3 py-2 rounded-pill mb-3 border border-color">✨ {{ __('On vous répond') }}</span>
+                <span class="badge bg-soft text-main px-3 py-2 rounded-pill mb-3 border border-color">
+                    <i class="fas fa-magic me-2" style="color: var(--btn-bg);"></i>{{ __('On vous répond') }}
+                </span>
                 <h1 class="display-4 fw-bold mb-4 brand-font lh-1">{{ __('Une question, un avis ou un partenariat ?') }}</h1>
                 <p class="lead opacity-75 mb-5 pe-lg-5">
                     {{ __('Nous sommes là pour vous écouter. Que vous soyez un particulier, un professionnel de santé ou un restaurateur, votre message nous intéresse.') }}
@@ -69,24 +71,36 @@
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <label class="form-label small fw-bold opacity-75">{{ __('Nom complet') }}</label>
-                                <input type="text" name="name" class="form-control rounded-pill px-3 py-2 border-color focus-ring" placeholder="{{ __('Votre nom') }}" required>
+                                <input type="text" name="name" class="form-control rounded-pill px-3 py-2 border-color focus-ring @error('name') is-invalid @enderror" value="{{ old('name', auth()->user()->name ?? '') }}" placeholder="{{ __('Votre nom') }}" required>
+                                @error('name')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label small fw-bold opacity-75">{{ __('Email') }}</label>
-                                <input type="email" name="email" class="form-control rounded-pill px-3 py-2 border-color focus-ring" placeholder="email@exemple.com" required>
+                                <input type="email" name="email" class="form-control rounded-pill px-3 py-2 border-color focus-ring @error('email') is-invalid @enderror" value="{{ old('email', auth()->user()->email ?? '') }}" placeholder="email@exemple.com" required @auth readonly @endauth>
+                                @error('email')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="col-12">
                                 <label class="form-label small fw-bold opacity-75">{{ __('Sujet') }}</label>
-                                <select name="subject" class="form-select rounded-pill px-3 py-2 border-color focus-ring cursor-pointer">
-                                    <option value="general">{{ __('Question générale') }}</option>
-                                    <option value="technical">{{ __('Problème technique') }}</option>
-                                    <option value="suggestion">{{ __('Suggestion de restaurant') }}</option>
-                                    <option value="partnership">{{ __('Partenariat') }}</option>
+                                <select name="subject" class="form-select rounded-pill px-3 py-2 border-color focus-ring cursor-pointer @error('subject') is-invalid @enderror">
+                                    <option value="general" @selected(old('subject') === 'general')>{{ __('Question générale') }}</option>
+                                    <option value="technical" @selected(old('subject') === 'technical')>{{ __('Problème technique') }}</option>
+                                    <option value="suggestion" @selected(old('subject') === 'suggestion')>{{ __('Suggestion de restaurant') }}</option>
+                                    <option value="partnership" @selected(old('subject') === 'partnership')>{{ __('Partenariat') }}</option>
                                 </select>
+                                @error('subject')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="col-12">
                                 <label class="form-label small fw-bold opacity-75">{{ __('Message') }}</label>
-                                <textarea name="message" class="form-control rounded-4 px-3 py-3 border-color focus-ring" rows="4" placeholder="{{ __('Comment pouvons-nous vous aider ?') }}" required></textarea>
+                                <textarea name="message" class="form-control rounded-4 px-3 py-3 border-color focus-ring @error('message') is-invalid @enderror" rows="4" placeholder="{{ __('Comment pouvons-nous vous aider ?') }}" required>{{ old('message') }}</textarea>
+                                @error('message')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="col-12 mt-4 text-center text-md-start">
                                 <button type="submit" class="btn btn-main px-5 py-3 shadow-md">{{ __('Envoyer mon message') }} <i class="fas fa-paper-plane ms-2"></i></button>

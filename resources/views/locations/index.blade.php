@@ -1,6 +1,6 @@
 @extends('main')
 
-@section('title', __('Carte Interactive 🗺️'))
+@section('title', __('Carte Interactive'))
 
 @section('content')
 <!-- Add Leaflet CSS -->
@@ -13,7 +13,7 @@
                 <span class="badge bg-soft text-main px-3 py-2 rounded-pill mb-3 border border-color shadow-sm">
                     <i class="fas fa-search-location me-2 text-success"></i>{{ __('Exploration Locale') }}
                 </span>
-                <h1 class="brand-font fw-bold mb-2 display-5 text-main">{{ __('Carte Interactive 🗺️') }}</h1>
+                <h1 class="brand-font fw-bold mb-2 display-5 text-main">{{ __('Carte Interactive') }} <i class="fas fa-map-marked-alt ms-2 text-success"></i></h1>
                 <p class="opacity-75 mb-0 fs-5 text-main">{{ __('Trouvez des pépites sans gluten près de chez vous au Maroc.') }}</p>
             </div>
             
@@ -39,7 +39,7 @@
                 <div class="card card-custom border-0 shadow-sm glass custom-scrollbar" style="max-height: 700px; overflow-y: auto; border-radius: 24px;" id="locations-list">
                     @if(count($locations) > 0)
                         @foreach($locations as $lieu)
-                        <div class="location-item p-4 border-bottom border-color transition-all" data-lat="{{ $lieu->latitude ?? '' }}" data-lng="{{ $lieu->longitude ?? '' }}" data-id="{{ $lieu->id }}" style="cursor: pointer; position: relative;">
+                        <div class="location-item p-4 border-bottom border-color transition-all" data-lat="{{ $lieu->latitude ?? '' }}" data-lng="{{ $lieu->longitude ?? '' }}" data-id="{{ $lieu->id }}" data-city="{{ strtolower($lieu->city) }}" style="cursor: pointer; position: relative;">
                             <div class="d-flex justify-content-between align-items-start mb-3">
                                 <h5 class="fw-bold brand-font mb-0 text-main fs-5" style="color: var(--btn-bg) !important;">{{ __($lieu->name) }}</h5>
                                 <span class="badge bg-soft text-main border border-color rounded-pill">{{ __($lieu->type) }}</span>
@@ -144,9 +144,10 @@
         });
         
         document.getElementById('city-search').addEventListener('keyup', e => {
-            const term = e.target.value.toLowerCase();
+            const term = e.target.value.toLowerCase().trim();
             document.querySelectorAll('.location-item').forEach(item => {
-                item.style.display = item.innerText.toLowerCase().includes(term) ? 'block' : 'none';
+                const city = (item.dataset.city || '').toLowerCase();
+                item.style.display = (term === '' || city.includes(term)) ? 'block' : 'none';
             });
         });
 

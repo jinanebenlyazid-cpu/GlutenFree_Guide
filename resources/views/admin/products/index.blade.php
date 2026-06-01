@@ -13,7 +13,7 @@
                         <li class="breadcrumb-item active" aria-current="page">{{ __('Produits') }}</li>
                     </ol>
                 </nav>
-                <h1 class="brand-font fw-bold mb-0">{{ __('Gestion des Produits') }} 🛒</h1>
+                <h1 class="brand-font fw-bold mb-0">{{ __('Gestion des Produits') }} <i class="fas fa-shopping-basket ms-2 text-success"></i></h1>
             </div>
             <a href="{{ route('admin.products.create') }}" class="btn btn-main rounded-pill px-4 shadow-sm fw-bold">
                 <i class="fas fa-plus me-2"></i> {{ __('Ajouter un produit') }}
@@ -66,7 +66,7 @@
                                         <a href="{{ route('admin.products.edit', $product->id) }}" class="btn btn-sm btn-outline-primary rounded-circle shadow-sm d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;" title="{{ __('Modifier') }}">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <form action="{{ route('admin.products.destroy', $product->id) }}" method="POST" onsubmit="return confirm('{{ __('Êtes-vous sûr de vouloir supprimer ce produit ?') }}')">
+                                        <form action="{{ route('admin.products.destroy', $product->id) }}" method="POST" class="d-inline confirm-form" data-confirm="{{ __('Êtes-vous sûr de vouloir supprimer ce produit ?') }}">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-sm btn-outline-danger rounded-circle shadow-sm d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;" title="{{ __('Supprimer') }}">

@@ -12,7 +12,7 @@
                         <a href="{{ route('admin.products.index') }}" class="text-decoration-none small" style="color: var(--btn-bg);">
                             <i class="fas fa-arrow-left me-1"></i> {{ __('Retour à la liste') }}
                         </a>
-                        <h2 class="brand-font fw-bold mt-2 mb-1">{{ __('Ajouter un Produit') }} 🛒</h2>
+                        <h2 class="brand-font fw-bold mt-2 mb-1">{{ __('Ajouter un Produit') }} <i class="fas fa-shopping-basket ms-2 text-success"></i></h2>
                         <p class="opacity-75">{{ __('Créez un nouveau produit pour le catalogue.') }}</p>
                     </div>
 

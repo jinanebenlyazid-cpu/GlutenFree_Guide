@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Recipe;
 use App\Models\Favorite;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -35,7 +36,7 @@ class FavoriteController extends Controller
         }
 
         $request->validate([
-            'id' => 'required|integer',
+            'id'   => 'required|integer',
             'type' => 'required|string|in:product,recipe',
         ]);
 
@@ -46,14 +47,23 @@ class FavoriteController extends Controller
 
         if ($favorite) {
             $favorite->delete();
-            $status = 'removed';
+            $status  = 'removed';
             $message = __('Retiré des favoris.');
         } else {
-            $model->favorites()->create([
-                'user_id' => Auth::id()
-            ]);
-            $status = 'added';
+            $model->favorites()->create(['user_id' => Auth::id()]);
+            $status  = 'added';
             $message = __('Ajouté aux favoris.');
+
+            // Create a "like" notification for recipe owners only
+            if ($request->type === 'recipe' && $model->user_id && $model->user_id !== Auth::id()) {
+                Notification::create([
+                    'user_id'   => $model->user_id,
+                    'actor_id'  => Auth::id(),
+                    'type'      => 'like',
+                    'recipe_id' => $model->id,
+                    'is_read'   => false,
+                ]);
+            }
         }
 
         if ($request->ajax()) {

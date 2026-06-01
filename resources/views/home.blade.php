@@ -14,7 +14,7 @@
                 </span>
                 <h1 class="display-3 fw-bold mb-4 brand-font lh-1">
                     {{ __('Trouvez du') }} <span style="color: var(--btn-bg);">sans gluten</span><br>
-                    {{ __('près de chez vous') }} 🌿
+                    {{ __('près de chez vous') }} <i class="fas fa-leaf ms-2" style="color: var(--btn-bg); font-size: 0.75em;"></i>
                 </h1>
                 <p class="lead mb-4 opacity-75 pe-lg-5">
                     {{ __('Une communauté dédiée pour découvrir des produits sains, trouver des restaurants adaptés et partager de délicieuses recettes marocaines.') }}
@@ -96,15 +96,16 @@
         <div class="row g-4">
             @php
                 $features = [
-                    ['icon' => 'shopping-basket', 'title' => 'Catalogue en Ligne', 'desc' => 'Trouvez des produits certifiés sans gluten disponibles dans les supermarchés.'],
-                    ['icon' => 'map-marked-alt', 'title' => 'Carte Interactive', 'desc' => 'Localisez les restaurants, boulangeries et hôtels avec options sans gluten.'],
-                    ['icon' => 'utensils', 'title' => 'Recettes 100% Goût', 'desc' => 'Partagez des recettes traditionnelles marocaines revisitées sans gluten.'],
-                    ['icon' => 'users', 'title' => 'Espace Communauté', 'desc' => "Rejoignez un espace d'entraide, créez vos listes et sauvegardez vos emplettes."]
+                    ['icon' => 'shopping-basket', 'title' => 'Catalogue en Ligne', 'desc' => 'Trouvez des produits certifiés sans gluten disponibles dans les supermarchés.', 'url' => route('products.index')],
+                    ['icon' => 'map-marked-alt', 'title' => 'Carte Interactive', 'desc' => 'Localisez les restaurants, boulangeries et hôtels avec options sans gluten.', 'url' => route('locations.index')],
+                    ['icon' => 'utensils', 'title' => 'Recettes 100% Goût', 'desc' => 'Partagez des recettes traditionnelles marocaines revisitées sans gluten.', 'url' => route('recipes.index')],
+                    ['icon' => 'users', 'title' => 'Espace Communauté', 'desc' => "Rejoignez un espace d'entraide, créez vos listes et sauvegardez vos emplettes.", 'url' => auth()->check() ? route('favorites.index') : route('register')]
                 ];
             @endphp
 
             @foreach($features as $index => $feature)
                 <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
+                    <a href="{{ $feature['url'] }}" class="feature-card-link d-block h-100 text-decoration-none text-main">
                     <div class="card card-custom h-100 p-4 text-center border-0 shadow-sm hover-lift">
                         <div class="icon-box mx-auto mb-4 p-3 rounded-circle d-flex align-items-center justify-content-center" style="width: 80px; height: 80px; background-color: var(--bg-soft); color: var(--btn-bg);">
                             <i class="fas fa-{{ $feature['icon'] }} fs-1"></i>
@@ -112,6 +113,7 @@
                         <h4 class="fw-bold brand-font mb-3">{{ __($feature['title']) }}</h4>
                         <p class="opacity-75 mb-0">{{ __($feature['desc']) }}</p>
                     </div>
+                    </a>
                 </div>
             @endforeach
         </div>
@@ -123,7 +125,9 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-5 mb-5 mb-lg-0 pe-lg-5" data-aos="fade-right">
-                <span class="badge bg-soft text-main px-3 py-2 rounded-pill mb-3 border border-color">{{ __('Mode d\'emploi ✨') }}</span>
+                <span class="badge bg-soft text-main px-3 py-2 rounded-pill mb-3 border border-color">
+                    <i class="fas fa-magic me-2" style="color: var(--btn-bg);"></i>{{ __('Mode d\'emploi') }}
+                </span>
                 <h2 class="brand-font fw-bold mb-4 display-5">{{ __('Naviguez & Participez') }}</h2>
                 <p class="opacity-75 mb-5 fs-5">{{ __('Le Guide Gluten-Free est collaboratif. Chacun peut aider des milliers de cœliaques à mieux manger au quotidien.') }}</p>
                 
@@ -169,7 +173,7 @@
              style="background: linear-gradient(135deg, var(--btn-bg), var(--btn-hover)); color: #fff;"
              data-aos="zoom-in">
             <div class="position-relative" style="z-index: 2;">
-                <h2 class="brand-font fw-bold mb-4 display-4">{{ __('Démarrez votre aventure sereinement 🌿') }}</h2>
+                <h2 class="brand-font fw-bold mb-4 display-4">{{ __('Démarrez votre aventure sereinement') }} <i class="fas fa-seedling ms-2" style="font-size: 0.75em;"></i></h2>
                 <p class="lead mb-5 mx-auto" style="max-width: 700px; opacity: 0.9;">
                     {{ __('Inscrivez-vous dès maintenant pour participer aux échanges de la première communauté cœliaque et sans gluten de tout le royaume.') }}
                 </p>
@@ -194,6 +198,10 @@
 <style>
     .shadow-2xl { box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); }
     .hover-lift:hover { transform: translateY(-10px); }
+    .feature-card-link { cursor: pointer; }
+    .feature-card-link .card { transition: transform 0.25s ease, box-shadow 0.25s ease; }
+    .feature-card-link:hover .card { box-shadow: 0 18px 35px rgba(0, 0, 0, 0.12) !important; }
+    .feature-card-link:focus-visible .card { outline: 3px solid rgba(107, 142, 35, 0.35); outline-offset: 4px; }
     .hero { background: radial-gradient(circle at 10% 20%, rgba(45, 90, 39, 0.03) 0%, transparent 40%); }
 </style>
 @endsection

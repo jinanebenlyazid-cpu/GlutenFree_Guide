@@ -19,7 +19,7 @@
                             <div class="bg-soft d-inline-flex align-items-center justify-content-center rounded-circle mb-3 shadow-inner" style="width: 80px; height: 80px;">
                                 <i class="fas fa-mortar-pestle text-success fs-2"></i>
                             </div>
-                            <h2 class="brand-font fw-bold text-main mb-2 fs-1">{{ __('Partager une recette') }} 🌿</h2>
+                            <h2 class="brand-font fw-bold text-main mb-2 fs-1">{{ __('Partager une recette') }} <i class="fas fa-mortar-pestle ms-2 text-success"></i></h2>
                             <p class="opacity-75 text-main fs-5 mb-4">{{ __('Inspirez la communauté avec vos créations culinaires sans gluten.') }}</p>
                             
                             <div class="alert border-0 rounded-4 d-inline-flex align-items-center gap-2 px-4 py-3 shadow-sm bg-white" style="font-size: 0.9rem;">

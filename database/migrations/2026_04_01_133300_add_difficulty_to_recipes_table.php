@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('recipes', function (Blueprint $table) {
-            $table->enum('difficulty', ['facile', 'moyen', 'difficile'])->default('facile')->after('prep_time');
-        });
+        if (!Schema::hasColumn('recipes', 'difficulty')) {
+            Schema::table('recipes', function (Blueprint $table) {
+                $table->enum('difficulty', ['facile', 'moyen', 'difficile'])->default('facile')->after('prep_time');
+            });
+        }
     }
 
     /**
@@ -21,8 +23,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('recipes', function (Blueprint $table) {
-            $table->dropColumn('difficulty');
-        });
+        if (Schema::hasColumn('recipes', 'difficulty')) {
+            Schema::table('recipes', function (Blueprint $table) {
+                $table->dropColumn('difficulty');
+            });
+        }
     }
 };

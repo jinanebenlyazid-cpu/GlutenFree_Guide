@@ -7,7 +7,7 @@
     <div class="container mt-4">
         <div class="row mb-5 align-items-center" data-aos="fade-up">
             <div class="col-md-6">
-                <h1 class="brand-font fw-bold mb-2 display-5 text-main">{{ __('Mes Favoris') }} ❤️</h1>
+                <h1 class="brand-font fw-bold mb-2 display-5 text-main">{{ __('Mes Favoris') }} <i class="fas fa-heart ms-2 text-danger"></i></h1>
                 <p class="opacity-75 mb-0 fs-5 text-main">{{ __('Retrouvez ici tout ce que vous avez aimé sur la plateforme.') }}</p>
             </div>
         </div>
@@ -81,7 +81,7 @@
                         @foreach($favoriteRecipes as $recipe)
                             <div class="col-md-6 col-lg-4 col-xl-3 d-flex align-items-stretch">
                                 <div class="card card-custom border-0 shadow-sm w-100 overflow-hidden recipe-card" style="border-radius: 20px;">
-                                    <div class="position-relative" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#recipeModal{{ $recipe->id }}">
+                                    <div class="position-relative">
                                         <img src="{{ asset($recipe->image_url ?? 'images/default-recipe.jpg') }}" class="card-img-top" alt="{{ $recipe->name }}" style="height: 220px; object-fit: cover;">
                                         <div class="position-absolute top-0 end-0 p-3 z-1">
                                             <form action="{{ route('favorites.toggle') }}" method="POST" class="favorite-toggle-form" onclick="event.stopPropagation();">

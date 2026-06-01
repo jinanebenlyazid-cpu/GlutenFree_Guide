@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Recipe;
 use App\Models\Location;
 use App\Models\Product;
+use App\Models\ContactMessage;
+use App\Models\Notification;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,10 +21,11 @@ class AdminController extends Controller
         $refusedRecipesCount = Recipe::refused()->count();
         $approvedLocationsCount = Location::approved()->count();
         $productsCount = Product::count();
+        $openMessagesCount = ContactMessage::where('status', 'open')->count();
 
         return view('admin.dashboard', compact(
             'pendingRecipes', 'pendingLocations',
-            'approvedRecipesCount', 'refusedRecipesCount', 'approvedLocationsCount', 'productsCount'
+            'approvedRecipesCount', 'refusedRecipesCount', 'approvedLocationsCount', 'productsCount', 'openMessagesCount'
         ));
     }
 
@@ -192,5 +196,68 @@ class AdminController extends Controller
         
         $message = $user->is_blocked ? __('Utilisateur bloqué avec succès.') : __('Utilisateur débloqué avec succès.');
         return back()->with('success', $message);
+    }
+
+    // --- Contact Messages ---
+
+    public function messagesIndex(Request $request)
+    {
+        $query = ContactMessage::with(['user', 'admin'])->latest();
+
+        if ($request->status && in_array($request->status, ['open', 'replied'])) {
+            $query->where('status', $request->status);
+        }
+
+        $messages = $query->paginate(8)->appends($request->all());
+        $counts = [
+            'all' => ContactMessage::count(),
+            'open' => ContactMessage::where('status', 'open')->count(),
+            'replied' => ContactMessage::where('status', 'replied')->count(),
+        ];
+        $status = $request->status ?? 'all';
+
+        return view('admin.messages.index', compact('messages', 'counts', 'status'));
+    }
+
+    public function messageShow(ContactMessage $contactMessage)
+    {
+        $contactMessage->load(['user', 'admin']);
+
+        return view('admin.messages.show', compact('contactMessage'));
+    }
+
+    public function replyToMessage(Request $request, ContactMessage $contactMessage)
+    {
+        $validated = $request->validate([
+            'reply' => 'required|string|max:5000',
+        ]);
+
+        if (!$contactMessage->user && $contactMessage->email) {
+            $matchedUser = User::where('email', $contactMessage->email)->first();
+
+            if ($matchedUser) {
+                $contactMessage->user_id = $matchedUser->id;
+            }
+        }
+
+        $contactMessage->update([
+            'reply' => $validated['reply'],
+            'status' => 'replied',
+            'replied_by' => Auth::id(),
+            'replied_at' => now(),
+        ]);
+
+        if ($contactMessage->user_id && $contactMessage->user()->exists()) {
+            Notification::create([
+                'user_id' => $contactMessage->user_id,
+                'actor_id' => Auth::id(),
+                'type' => 'contact_reply',
+                'contact_message_id' => $contactMessage->id,
+            ]);
+
+            return redirect()->route('admin.messages.show', $contactMessage)->with('success', __('Réponse envoyée dans les notifications de l’utilisateur.'));
+        }
+
+        return redirect()->route('admin.messages.show', $contactMessage)->with('success', __('Réponse enregistrée. Aucun compte utilisateur correspondant n’a été trouvé pour envoyer une notification.'));
     }
 }

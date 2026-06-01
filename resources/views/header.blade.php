@@ -63,6 +63,54 @@
                     <div class="vr mx-1 opacity-25 d-none d-lg-block"></div>
 
                     @auth
+                        {{-- ── Notification Bell ── --}}
+                        <div class="dropdown" id="notif-dropdown-wrapper">
+                            <button class="btn btn-sm btn-link text-decoration-none p-2 rounded-circle hover-bg position-relative"
+                                    id="notif-bell-btn"
+                                    type="button"
+                                    data-bs-toggle="dropdown"
+                                    data-bs-auto-close="outside"
+                                    aria-expanded="false"
+                                    style="color: var(--text-main);"
+                                    onclick="loadNotifications()">
+                                <i class="fas fa-bell fs-5"></i>
+                                <span id="notif-badge"
+                                      class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none"
+                                      style="font-size: 0.65rem; min-width: 18px;">0</span>
+                            </button>
+
+                            <div class="dropdown-menu dropdown-menu-end shadow-lg border-0 p-0 mt-2"
+                                 id="notif-panel"
+                                 style="border-radius: 16px; width: 360px; max-width: 95vw; background: var(--card-bg); border: 1px solid var(--border-color);">
+
+                                {{-- Header --}}
+                                <div class="d-flex justify-content-between align-items-center px-4 py-3 border-bottom border-color">
+                                    <h6 class="mb-0 fw-bold brand-font" style="color: var(--text-main);">
+                                        <i class="fas fa-bell me-2" style="color: var(--btn-bg);"></i>
+                                        {{ __('Notifications') }}
+                                    </h6>
+                                    <button class="btn btn-sm btn-link text-decoration-none fw-bold p-0"
+                                            onclick="markAllRead()"
+                                            style="color: var(--btn-bg); font-size: 0.8rem;">
+                                        {{ __('Tout marquer lu') }}
+                                    </button>
+                                </div>
+
+                                {{-- Notification List --}}
+                                <div id="notif-list" style="max-height: 360px; overflow-y: auto;"></div>
+
+                                {{-- Empty state (hidden by default) --}}
+                                <div id="notif-empty" class="text-center py-5 px-3 d-none">
+                                    <i class="fas fa-bell-slash fa-2x mb-3 opacity-25" style="color: var(--text-main);"></i>
+                                    <p class="mb-0 opacity-50 small fw-bold">{{ __('Aucune notification pour le moment') }}</p>
+                                </div>
+
+                                {{-- Loading state --}}
+                                <div id="notif-loading" class="text-center py-4">
+                                    <div class="spinner-border spinner-border-sm" style="color: var(--btn-bg);" role="status"></div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="dropdown">
                             <button class="btn btn-main d-flex align-items-center gap-2" type="button"
                                 data-bs-toggle="dropdown">

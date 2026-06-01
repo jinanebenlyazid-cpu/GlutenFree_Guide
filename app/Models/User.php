@@ -49,6 +49,11 @@ class User extends Authenticatable
         return $this->hasMany(Location::class);
     }
 
+    public function contactMessages()
+    {
+        return $this->hasMany(ContactMessage::class);
+    }
+
     public function isAdmin(): bool
     {
         return (bool) $this->is_admin;

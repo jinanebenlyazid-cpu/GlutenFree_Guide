@@ -111,21 +111,21 @@
                                     <div class="row g-4">
                                         <div class="col-md-4 text-center" data-aos="zoom-in">
                                             <div class="p-4 rounded-5 border border-color bg-white-adaptive shadow-sm h-100 hover-up transition-all">
-                                                <div class="fs-1 mb-3">🔪</div>
+                                                <div class="fs-1 mb-3 text-success"><i class="fas fa-utensils"></i></div>
                                                 <h6 class="fw-bold mb-2">{{ __('Ustensiles') }}</h6>
                                                 <p class="x-small opacity-75 mb-0">{{ __('Utilisez une planche à découper et un grille-pain dédiés.') }}</p>
                                             </div>
                                         </div>
                                         <div class="col-md-4 text-center" data-aos="zoom-in" data-aos-delay="100">
                                             <div class="p-4 rounded-5 border border-color bg-white-adaptive shadow-sm h-100 hover-up transition-all">
-                                                <div class="fs-1 mb-3">🧊</div>
+                                                <div class="fs-1 mb-3 text-info"><i class="fas fa-snowflake"></i></div>
                                                 <h6 class="fw-bold mb-2">{{ __('Rangement') }}</h6>
                                                 <p class="x-small opacity-75 mb-0">{{ __('Placez les produits sans gluten en haut des placards.') }}</p>
                                             </div>
                                         </div>
                                         <div class="col-md-4 text-center" data-aos="zoom-in" data-aos-delay="200">
                                             <div class="p-4 rounded-5 border border-color bg-white-adaptive shadow-sm h-100 hover-up transition-all">
-                                                <div class="fs-1 mb-3">🧼</div>
+                                                <div class="fs-1 mb-3 text-success"><i class="fas fa-soap"></i></div>
                                                 <h6 class="fw-bold mb-2">{{ __('Hygiène') }}</h6>
                                                 <p class="x-small opacity-75 mb-0">{{ __('Lavez-vous les mains après avoir manipulé du blé.') }}</p>
                                             </div>
@@ -273,25 +273,25 @@
                                     <div class="row g-4">
                                         <div class="col-md-3 col-6 text-center">
                                             <div class="p-3 bg-white-adaptive rounded-4 border border-color shadow-sm hover-up transition-all">
-                                                <div class="fs-2 mb-2">🏃‍♀️</div>
+                                                <div class="fs-2 mb-2 text-success"><i class="fas fa-running"></i></div>
                                                 <span class="small fw-bold">{{ __('Activité physique régulière') }}</span>
                                             </div>
                                         </div>
                                         <div class="col-md-3 col-6 text-center">
                                             <div class="p-3 bg-white-adaptive rounded-4 border border-color shadow-sm hover-up transition-all">
-                                                <div class="fs-2 mb-2">🥗</div>
+                                                <div class="fs-2 mb-2 text-success"><i class="fas fa-apple-alt"></i></div>
                                                 <span class="small fw-bold">{{ __('Alimentation équilibrée') }}</span>
                                             </div>
                                         </div>
                                         <div class="col-md-3 col-6 text-center">
                                             <div class="p-3 bg-white-adaptive rounded-4 border border-color shadow-sm hover-up transition-all">
-                                                <div class="fs-2 mb-2">😴</div>
+                                                <div class="fs-2 mb-2 text-success"><i class="fas fa-bed"></i></div>
                                                 <span class="small fw-bold">{{ __('Bon sommeil') }}</span>
                                             </div>
                                         </div>
                                         <div class="col-md-3 col-6 text-center">
                                             <div class="p-3 bg-white-adaptive rounded-4 border border-color shadow-sm hover-up transition-all">
-                                                <div class="fs-2 mb-2">🚭</div>
+                                                <div class="fs-2 mb-2 text-danger"><i class="fas fa-smoking-ban"></i></div>
                                                 <span class="small fw-bold">{{ __('Éviter le tabac') }}</span>
                                             </div>
                                         </div>

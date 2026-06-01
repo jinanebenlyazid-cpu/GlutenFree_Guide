@@ -23,7 +23,7 @@ Route::get('/', function () {
 Route::group(['as' => 'pages.'], function () {
     Route::get('/about', [PageController::class, 'about'])->name('about');
     Route::get('/contact', [PageController::class, 'contact'])->name('contact');
-    Route::post('/contact', [PageController::class, 'submitContact'])->name('contact.submit');
+    Route::post('/contact', [PageController::class, 'submitContact'])->middleware('auth')->name('contact.submit');
     
     Route::get('/about/celiac-disease', [PageController::class, 'celiac'])->name('celiac');
     Route::get('/about/gluten-free-tips', [PageController::class, 'tips'])->name('tips');
@@ -57,9 +57,25 @@ Route::resource('recipes', RecipeController::class);
 Route::middleware(['auth'])->group(function () {
     Route::get('/favorites', [\App\Http\Controllers\FavoriteController::class, 'index'])->name('favorites.index');
     Route::get('/my-recipes', [RecipeController::class, 'myRecipes'])->name('recipes.my');
+    Route::get('/messages/{contactMessage}', [PageController::class, 'showContactMessage'])->name('messages.show');
 
     // Challenges
     Route::get('/daily-challenge', [\App\Http\Controllers\ChallengeController::class, 'getDailyChallenge'])->name('challenge.daily');
+
+    // Notifications
+    Route::get('/notifications', [\App\Http\Controllers\NotificationController::class, 'index'])->name('notifications.index');
+    Route::post('/notifications/mark-all-read', [\App\Http\Controllers\NotificationController::class, 'markAllRead'])->name('notifications.markAllRead');
+    Route::post('/notifications/{id}/mark-read', [\App\Http\Controllers\NotificationController::class, 'markRead'])->name('notifications.markRead');
+});
+
+// Chatbot (Gluto AI)
+Route::middleware(['auth'])->group(function () {
+    Route::post('/chatbot', [\App\Http\Controllers\ChatbotController::class, 'chat'])->name('chatbot.chat');
+    Route::get('/chatbot/conversations', [\App\Http\Controllers\ChatbotController::class, 'indexConversations']);
+    Route::post('/chatbot/conversations', [\App\Http\Controllers\ChatbotController::class, 'storeConversation']);
+    Route::get('/chatbot/conversations/{conversation}', [\App\Http\Controllers\ChatbotController::class, 'showConversation']);
+    Route::put('/chatbot/conversations/{conversation}', [\App\Http\Controllers\ChatbotController::class, 'updateConversation']);
+    Route::delete('/chatbot/conversations/{conversation}', [\App\Http\Controllers\ChatbotController::class, 'destroyConversation']);
 });
 
 // Moved outside middleware to handle unauthenticated AJAX cleanly
@@ -105,5 +121,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/users', [\App\Http\Controllers\AdminController::class, 'usersIndex'])->name('admin.users.index');
     Route::get('/users/{user}', [\App\Http\Controllers\AdminController::class, 'usersShow'])->name('admin.users.show');
     Route::patch('/users/{user}/toggle-block', [\App\Http\Controllers\AdminController::class, 'toggleBlockUser'])->name('admin.users.toggle-block');
-});
 
+    // Contact Messages
+    Route::get('/messages', [\App\Http\Controllers\AdminController::class, 'messagesIndex'])->name('admin.messages.index');
+    Route::get('/messages/{contactMessage}', [\App\Http\Controllers\AdminController::class, 'messageShow'])->name('admin.messages.show');
+    Route::post('/messages/{contactMessage}/reply', [\App\Http\Controllers\AdminController::class, 'replyToMessage'])->name('admin.messages.reply');
+});

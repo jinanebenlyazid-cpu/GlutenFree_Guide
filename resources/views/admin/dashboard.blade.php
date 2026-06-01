@@ -23,6 +23,9 @@
                     <a href="{{ route('admin.users.index') }}" class="btn btn-outline-primary rounded-pill px-4 btn-sm fw-bold">
                         <i class="fas fa-users me-2"></i> {{ __('Utilisateurs') }}
                     </a>
+                    <a href="{{ route('admin.messages.index') }}" class="btn btn-outline-primary rounded-pill px-4 btn-sm fw-bold">
+                        <i class="fas fa-envelope me-2"></i> {{ __('Messages') }}
+                    </a>
                 </div>
             </div>
         </div>
@@ -71,15 +74,15 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <a href="{{ route('admin.recipes.index', ['status' => 'refused']) }}" class="text-decoration-none">
+                <a href="{{ route('admin.messages.index', ['status' => 'open']) }}" class="text-decoration-none">
                     <div class="card card-custom border-0 shadow-sm p-4 hover-lift">
                         <div class="d-flex align-items-center gap-3">
-                            <div class="rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="width: 50px; height: 50px; background-color: rgba(220, 53, 69, 0.15); color: #dc3545;">
-                                <i class="fas fa-times-circle fs-5"></i>
+                            <div class="rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="width: 50px; height: 50px; background-color: rgba(13, 110, 253, 0.15); color: #0d6efd;">
+                                <i class="fas fa-envelope-open-text fs-5"></i>
                             </div>
                             <div>
-                                <div class="fs-4 fw-bold" style="color: var(--text-main);">{{ $refusedRecipesCount }}</div>
-                                <div class="small opacity-75 text-main">{{ __('Recettes Refusées') }}</div>
+                                <div class="fs-4 fw-bold" style="color: var(--text-main);">{{ $openMessagesCount }}</div>
+                                <div class="small opacity-75 text-main">{{ __('Messages ouverts') }}</div>
                             </div>
                         </div>
                     </div>

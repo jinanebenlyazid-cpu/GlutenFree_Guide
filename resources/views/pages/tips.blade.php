@@ -101,19 +101,19 @@
                 <h2 class="brand-font fw-bold display-5 mb-4">{{ __('Les Best-Sellers Naturels') }}</h2>
                 <div class="d-flex flex-wrap gap-4">
                     <div class="p-4 bg-white-adaptive border border-color rounded-4 shadow-sm flex-grow-1 text-center hover-up">
-                        <div class="fs-1 mb-2">🍚</div>
+                        <div class="fs-1 mb-2 text-success"><i class="fas fa-seedling"></i></div>
                         <h6 class="fw-bold mb-0">{{ __('Riz Complet') }}</h6>
                     </div>
                     <div class="p-4 bg-white-adaptive border border-color rounded-4 shadow-sm flex-grow-1 text-center hover-up">
-                        <div class="fs-1 mb-2">🌽</div>
+                        <div class="fs-1 mb-2 text-success"><i class="fas fa-leaf"></i></div>
                         <h6 class="fw-bold mb-0">{{ __('Maïs') }}</h6>
                     </div>
                     <div class="p-4 bg-white-adaptive border border-color rounded-4 shadow-sm flex-grow-1 text-center hover-up">
-                        <div class="fs-1 mb-2">🍠</div>
+                        <div class="fs-1 mb-2 text-success"><i class="fas fa-carrot"></i></div>
                         <h6 class="fw-bold mb-0">{{ __('Pommes de terre') }}</h6>
                     </div>
                     <div class="p-4 bg-white-adaptive border border-color rounded-4 shadow-sm flex-grow-1 text-center hover-up">
-                        <div class="fs-1 mb-2">🥜</div>
+                        <div class="fs-1 mb-2 text-success"><i class="fas fa-layer-group"></i></div>
                         <h6 class="fw-bold mb-0">{{ __('Légumineuses') }}</h6>
                     </div>
                 </div>

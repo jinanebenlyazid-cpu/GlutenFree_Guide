@@ -19,27 +19,33 @@ class CommentController extends Controller
         }
 
         $request->validate([
-            'body' => 'required|string|max:1000',
+            'body'      => 'required|string|max:1000',
+            'parent_id' => 'nullable|integer|exists:comments,id',
         ]);
 
         $comment = $recipe->comments()->create([
-            'body' => $request->body,
-            'user_id' => Auth::id(),
+            'body'      => $request->body,
+            'user_id'   => Auth::id(),
+            'parent_id' => $request->parent_id ?? null,
         ]);
 
-        $comment->load('user');
+        $comment->load(['user', 'replies.user']);
 
         if ($request->ajax() || $request->wantsJson()) {
             return response()->json([
                 'success' => true,
                 'comment' => [
-                    'id' => $comment->id,
-                    'body' => $comment->body,
-                    'user_name' => optional($comment->user)->name ?? __('Anonyme'),
-                    'user_initial' => strtoupper(substr(optional($comment->user)->name ?? 'A', 0, 1)),
-                    'time' => $comment->created_at->diffForHumans(),
-                    'can_delete' => true,
-                    'delete_url' => route('comments.destroy', $comment->id),
+                    'id'          => $comment->id,
+                    'parent_id'   => $comment->parent_id,
+                    'body'        => $comment->body,
+                    'user_name'   => optional($comment->user)->name ?? __('Anonyme'),
+                    'user_initial'=> strtoupper(substr(optional($comment->user)->name ?? 'A', 0, 1)),
+                    'user_avatar' => optional($comment->user)->profile_photo_path
+                                        ? asset('storage/' . $comment->user->profile_photo_path)
+                                        : null,
+                    'time'        => $comment->created_at->diffForHumans(),
+                    'can_delete'  => true,
+                    'delete_url'  => route('comments.destroy', $comment->id),
                 ],
             ]);
         }

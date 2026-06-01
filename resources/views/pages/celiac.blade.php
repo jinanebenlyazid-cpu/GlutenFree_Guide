@@ -48,17 +48,17 @@
 
             @php
                 $symptoms = [
-                    ['icon' => 'stomach', 'title' => 'Digestifs', 'desc' => 'Ballonnements, douleurs abdominales, diarrhée chronique ou constipation.', 'emoji' => '🤢'],
-                    ['icon' => 'tired', 'title' => 'Généraux', 'desc' => 'Fatigue chronique, anémie, perte de poids inexpliquée.', 'emoji' => '😴'],
-                    ['icon' => 'brain', 'title' => 'Neurologiques', 'desc' => 'Maux de tête, irritabilité, "brouillard mental".', 'emoji' => '🧠'],
-                    ['icon' => 'child', 'title' => 'Croissance', 'desc' => 'Chez l\'enfant : retard de croissance, irritabilité, manque d\'appétit.', 'emoji' => '📈'],
+                    ['icon' => 'notes-medical', 'title' => 'Digestifs', 'desc' => 'Ballonnements, douleurs abdominales, diarrhée chronique ou constipation.'],
+                    ['icon' => 'battery-quarter', 'title' => 'Généraux', 'desc' => 'Fatigue chronique, anémie, perte de poids inexpliquée.'],
+                    ['icon' => 'brain', 'title' => 'Neurologiques', 'desc' => 'Maux de tête, irritabilité, "brouillard mental".'],
+                    ['icon' => 'chart-line', 'title' => 'Croissance', 'desc' => 'Chez l\'enfant : retard de croissance, irritabilité, manque d\'appétit.'],
                 ];
             @endphp
 
             @foreach($symptoms as $idx => $s)
             <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="{{ $idx * 100 }}">
                 <div class="card card-custom h-100 border-0 shadow-sm glass p-4 rounded-5 text-center hover-up">
-                    <div class="display-3 mb-3">{{ $s['emoji'] }}</div>
+                    <div class="display-3 mb-3 text-success"><i class="fas fa-{{ $s['icon'] }}"></i></div>
                     <h5 class="fw-bold mb-3 brand-font">{{ __($s['title']) }}</h5>
                     <p class="small opacity-75 mb-0 px-2">{{ __($s['desc']) }}</p>
                 </div>
@@ -73,7 +73,7 @@
                     <h2 class="brand-font fw-bold mb-4">{{ __('Le Diagnostic') }}</h2>
                     <p class="opacity-75 fs-5 mb-4">{{ __('Le parcours classique en deux étapes cruciales :') }}</p>
                     <div class="step-card d-flex gap-4 p-4 bg-white-adaptive rounded-4 border border-color shadow-sm mb-4">
-                        <div class="step-num bg-main text-white">🧪</div>
+                        <div class="step-num bg-main text-white"><i class="fas fa-vial"></i></div>
 
                         <div>
                             <h6 class="fw-bold text-main mb-1">{{ __('Sérologie') }}</h6>
@@ -81,7 +81,7 @@
                         </div>
                     </div>
                     <div class="step-card d-flex gap-4 p-4 bg-white-adaptive rounded-4 border border-color shadow-sm">
-                        <div class="step-num bg-main text-white">🔬</div>
+                        <div class="step-num bg-main text-white"><i class="fas fa-microscope"></i></div>
 
                         <div>
                             <h6 class="fw-bold text-main mb-1">{{ __('Biopsie') }}</h6>

@@ -11,7 +11,7 @@
                 <span class="badge bg-soft text-main px-3 py-2 rounded-pill mb-3 border border-color shadow-sm">
                     <i class="fas fa-user-circle me-2 text-success"></i>{{ __('Mon Espace') }}
                 </span>
-                <h1 class="brand-font fw-bold mb-2 display-5 text-main">{{ __('Mes Recettes Partagées') }} 🥘</h1>
+                <h1 class="brand-font fw-bold mb-2 display-5 text-main">{{ __('Mes Recettes Partagées') }} <i class="fas fa-book-open ms-2 text-success"></i></h1>
                 <p class="opacity-75 mb-0 fs-5 text-main">{{ __('Retrouvez ici toutes les recettes que vous avez proposées à la communauté.') }}</p>
             </div>
             <div class="col-md-5 text-md-end mt-4 mt-md-0">

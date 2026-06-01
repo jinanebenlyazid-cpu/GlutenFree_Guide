@@ -92,8 +92,7 @@
                         </ul>
 
                         @if(auth()->id() !== $user->id)
-                            <form action="{{ route('admin.users.toggle-block', $user->id) }}" method="POST"
-                                onsubmit="return confirm('{{ $user->is_blocked ? __('Voulez-vous débloquer cet utilisateur ?') : __('Voulez-vous bloquer cet utilisateur ?') }}');">
+                            <form action="{{ route('admin.users.toggle-block', $user->id) }}" method="POST" class="d-inline confirm-form" data-confirm="{{ $user->is_blocked ? __('Voulez-vous débloquer cet utilisateur ?') : __('Voulez-vous bloquer cet utilisateur ?') }}">
                                 @csrf
                                 @method('PATCH')
                                 <button type="submit"

@@ -18,7 +18,7 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
         Paginator::useBootstrapFive();
 
-        if (request()->server('HTTP_X_FORWARDED_PROTO') === 'https' || app()->environment('production')) {
+        if (!app()->isLocal() && (request()->server('HTTP_X_FORWARDED_PROTO') === 'https' || app()->environment('production'))) {
             \Illuminate\Support\Facades\URL::forceScheme('https');
         }
     }

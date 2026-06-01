@@ -12,7 +12,7 @@
                         <div class="d-inline-flex align-items-center justify-content-center rounded-circle mb-3 shadow-sm" style="width: 60px; height: 60px; background-color: var(--btn-bg); color: white; font-size: 1.5rem;">
                             <i class="fas fa-map-marker-alt"></i>
                         </div>
-                        <h2 class="brand-font fw-bold mb-1">{{ __('Ajouter un lieu') }} 📍</h2>
+                        <h2 class="brand-font fw-bold mb-1">{{ __('Ajouter un lieu') }} <i class="fas fa-map-pin ms-2 text-success"></i></h2>
                         <p class="opacity-75">{{ __('Partagez une adresse sans gluten avec la communauté !') }}</p>
                         <div class="alert border-0 rounded-3 d-inline-flex align-items-center gap-2 px-4 py-2" style="background-color: var(--bg-soft); color: var(--text-main); font-size: 0.85rem;">
                             <i class="fas fa-info-circle" style="color: var(--btn-bg);"></i>

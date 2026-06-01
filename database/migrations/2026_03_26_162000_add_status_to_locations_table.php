@@ -8,15 +8,19 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::table('locations', function (Blueprint $table) {
-            $table->enum('status', ['pending', 'approved', 'refused'])->default('pending')->after('user_id');
-        });
+        if (!Schema::hasColumn('locations', 'status')) {
+            Schema::table('locations', function (Blueprint $table) {
+                $table->enum('status', ['pending', 'approved', 'refused'])->default('pending')->after('user_id');
+            });
+        }
     }
 
     public function down(): void
     {
-        Schema::table('locations', function (Blueprint $table) {
-            $table->dropColumn('status');
-        });
+        if (Schema::hasColumn('locations', 'status')) {
+            Schema::table('locations', function (Blueprint $table) {
+                $table->dropColumn('status');
+            });
+        }
     }
 };

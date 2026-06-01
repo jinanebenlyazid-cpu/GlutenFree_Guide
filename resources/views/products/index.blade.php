@@ -3,11 +3,77 @@
 @section('title', __('Catalogue de Produits Sans Gluten'))
 
 @section('content')
+<style>
+/* ── Custom Select Dropdown ────────────────────────────── */
+.custom-select-container {
+    position: relative;
+    border-radius: 50px;
+    overflow: visible;
+}
+.custom-select-trigger {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 16px;
+    cursor: pointer;
+    user-select: none;
+    border-radius: 50px;
+    transition: background 0.18s;
+}
+.custom-select-trigger:hover { background: var(--bg-soft); }
+.dropdown-arrow {
+    font-size: .7rem;
+    opacity: .45;
+    margin-left: auto;
+    transition: transform .25s cubic-bezier(.34,1.56,.64,1);
+}
+.custom-select-container.open .dropdown-arrow { transform: rotate(180deg); }
+
+.custom-select-menu {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0; right: 0;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+    box-shadow: 0 16px 48px rgba(0,0,0,.14), 0 4px 16px rgba(0,0,0,.08);
+    list-style: none;
+    margin: 0; padding: 6px;
+    z-index: 9999;
+    opacity: 0;
+    transform: translateY(-10px) scale(.97);
+    pointer-events: none;
+    transition: opacity .2s ease, transform .2s cubic-bezier(.34,1.56,.64,1);
+    max-height: 280px;
+    overflow-y: auto;
+}
+.custom-select-container.open .custom-select-menu {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: all;
+}
+.custom-select-item {
+    padding: 10px 14px;
+    border-radius: 11px;
+    cursor: pointer;
+    font-size: .86rem;
+    color: var(--text-main);
+    transition: background .13s;
+    margin-bottom: 2px;
+}
+.custom-select-item:hover { background: var(--bg-soft); }
+.custom-select-item.active {
+    background: var(--btn-bg);
+    color: #fff;
+    font-weight: 600;
+}
+</style>
+
 <section class="section py-5" style="background-color: var(--bg-soft); min-height: calc(100vh - 100px);">
     <div class="container-fluid px-lg-5">
         <div class="row mb-5 align-items-center" data-aos="fade-up">
             <div class="col-md-12 text-center text-md-start">
-                <h1 class="brand-font fw-bold mb-2 display-5 text-main">{{ __('Produits Certifiés Sans Gluten') }} 🌾</h1>
+                <h1 class="brand-font fw-bold mb-2 display-5 text-main">{{ __('Produits Certifiés Sans Gluten') }} <i class="fas fa-seedling ms-2 text-success"></i></h1>
                 <p class="opacity-75 mb-0 fs-5 text-main">{{ __('Explorez notre large sélection de produits garantis sans gluten au Maroc.') }}</p>
             </div>
         </div>
@@ -15,7 +81,7 @@
         <div class="row g-4">
             <!-- Sidebar list -->
             <div class="col-lg-3" data-aos="fade-right" data-aos-delay="100">
-                <div class="card card-custom border-0 shadow-sm p-4 sticky-top glass" style="top: 100px; border-radius: 24px;">
+                <div class="card card-custom border-0 shadow-sm p-4 sticky-top glass" style="top: 100px; border-radius: 24px; overflow: visible;">
                     <form action="{{ route('products.index') }}" method="GET" id="filterForm">
                         <!-- Search Section -->
                         <div class="mb-4">
@@ -39,19 +105,39 @@
                             </div>
                         </div>
 
-                        <!-- Categories Section -->
+                        <!-- Categories Section – Custom Dropdown -->
                         <div class="mb-4">
-                            <label for="category" class="form-label small fw-bold text-main opacity-75 ms-2">{{ __('Catégories') }}</label>
-                            <div class="input-group glass-input rounded-pill border border-color overflow-hidden p-1 shadow-xs transition-all">
-                                <span class="input-group-text bg-transparent border-0 ps-3"><i class="fas fa-tag opacity-30 text-main"></i></span>
-                                <select name="category" id="category" class="form-select border-0 bg-transparent shadow-none py-2 px-3 text-main small" onchange="this.form.submit()">
-                                    <option value="">{{ __('Toutes les catégories') }}</option>
+                            <label class="form-label small fw-bold text-main opacity-75 ms-2">{{ __('Catégories') }}</label>
+
+                            {{-- Hidden input sent with the form --}}
+                            <input type="hidden" name="category" id="categoryHidden" value="{{ request('category') }}">
+
+                            <div class="custom-select-container glass-input border border-color shadow-xs" id="customCategorySelect">
+                                <div class="custom-select-trigger" onclick="toggleCategoryDropdown(event)">
+                                    <i class="fas fa-tag opacity-30 text-main" style="width:14px;flex-shrink:0"></i>
+                                    <span class="text-main small" id="selectedCategoryText" style="min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
+                                        @php $selCat = request('category'); @endphp
+                                        {{ $selCat ? __($selCat) : __('Toutes les catégories') }}
+                                    </span>
+                                    <i class="fas fa-chevron-down dropdown-arrow"></i>
+                                </div>
+
+                                <ul class="custom-select-menu" id="categoryMenu">
+                                    <li class="custom-select-item {{ !$selCat ? 'active' : '' }}"
+                                        data-value=""
+                                        onclick="selectCategoryOption(event,'','{{ __('Toutes les catégories') }}')">
+                                        <i class="fas fa-th-large me-2 opacity-40" style="width:14px"></i>{{ __('Toutes les catégories') }}
+                                    </li>
                                     @foreach($categories as $cat)
                                         @if($cat)
-                                            <option value="{{ $cat }}" {{ request('category') == $cat ? 'selected' : '' }}>{{ __($cat) }}</option>
+                                        <li class="custom-select-item {{ $selCat == $cat ? 'active' : '' }}"
+                                            data-value="{{ $cat }}"
+                                            onclick="selectCategoryOption(event,'{{ $cat }}','{{ __($cat) }}')">
+                                            {{ __($cat) }}
+                                        </li>
                                         @endif
                                     @endforeach
-                                </select>
+                                </ul>
                             </div>
                         </div>
 
@@ -143,50 +229,12 @@
 <!-- MODALS OUTSIDE FOR BETTER PERFORMANCE -->
 @if($products->count() > 0)
     @foreach($products as $product)
-        <div class="modal fade" id="productModal{{ $product->id }}" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
-                <div class="modal-content card-custom border-0 shadow-lg" style="border-radius: 24px;">
-                    <div class="modal-header border-0 pb-0 px-4 pt-4">
-                        <h4 class="fw-bold brand-font mb-0 text-main">{{ __($product->name) }}</h4>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body p-4">
-                        <div class="row g-4">
-                            <div class="col-md-6 text-center">
-                                <div class="bg-white-adaptive rounded-4 p-3 border border-color d-flex align-items-center justify-content-center h-100 shadow-inner" style="min-height: 300px;">
-                                    <img src="{{ asset($product->image_url) }}" class="img-fluid" style="max-height: 300px; object-fit: contain;">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <span class="badge bg-soft text-main px-3 py-2 rounded-pill mb-3 border border-color">{{ __($product->category) }}</span>
-                                <h3 class="fw-bold text-success mb-3">{{ number_format($product->price, 2) }} {{ __('DH') }}</h3>
-                                <p class="opacity-75 mb-4 text-main fs-6 l-h-base">{{ __($product->description) }}</p>
-                                @if($product->ingredients)
-                                    <div class="p-4 rounded-4 border border-color bg-soft text-start shadow-sm">
-                                        <strong class="brand-font d-block mb-2 text-main"><i class="fas fa-layer-group me-2 text-success"></i>{{ __('Ingrédients / Composition') }}</strong>
-                                        <p class="small text-main mb-0 lh-base opacity-75">{{ __($product->ingredients) }}</p>
-                                    </div>
-                                @endif
-                                <div class="mt-4 d-flex gap-2">
-                                     @auth
-                                        <form action="{{ route('favorites.toggle') }}" method="POST" class="favorite-toggle-form flex-grow-1">
-                                            @csrf
-                                            <input type="hidden" name="id" value="{{ $product->id }}">
-                                            <input type="hidden" name="type" value="product">
-                                            <button type="submit" class="btn btn-outline-danger w-100 rounded-pill fw-bold">
-                                                <i class="fas fa-heart me-2"></i>{{ $product->favorites()->where('user_id', auth()->id())->exists() ? __('Retirer des favoris') : __('Ajouter aux favoris') }}
-                                            </button>
-                                        </form>
-                                    @endauth
-                                    <button class="btn btn-soft-secondary rounded-pill px-4" data-bs-dismiss="modal">{{ __('Fermer') }}</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @include('products.show_modal', ['product' => $product])
     @endforeach
+@endif
+
+@if(isset($selectedProduct) && !$products->contains($selectedProduct))
+    @include('products.show_modal', ['product' => $selectedProduct])
 @endif
 
 <style>
@@ -247,5 +295,36 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+</script>
+
+<script>
+/* ── Custom Category Dropdown ─────────────────────────── */
+(function () {
+    const container = document.getElementById('customCategorySelect');
+    if (!container) return;
+
+    // Close when clicking outside
+    document.addEventListener('click', function (e) {
+        if (!container.contains(e.target)) container.classList.remove('open');
+    });
+
+    window.toggleCategoryDropdown = function (e) {
+        e.stopPropagation();
+        container.classList.toggle('open');
+    };
+
+    window.selectCategoryOption = function (e, value, label) {
+        e.stopPropagation();
+        document.getElementById('categoryHidden').value = value;
+        document.getElementById('selectedCategoryText').textContent = label;
+
+        document.querySelectorAll('#categoryMenu .custom-select-item').forEach(function (item) {
+            item.classList.toggle('active', item.dataset.value === value);
+        });
+
+        container.classList.remove('open');
+        document.getElementById('filterForm').submit();
+    };
+})();
 </script>
 @endsection

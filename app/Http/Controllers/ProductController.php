@@ -32,7 +32,12 @@ class ProductController extends Controller
         }
 
         // Pagination with Bootstrap 5
-        $products = $query->paginate(5)->withQueryString();
+        $products = $query->paginate(6)->withQueryString();
+        
+        $selectedProduct = null;
+        if ($request->filled('product')) {
+            $selectedProduct = Product::find($request->product);
+        }
         
         // Fetch unique categories for filter, sorted alphabetically
         $categories = Product::select('category')
@@ -42,7 +47,7 @@ class ProductController extends Controller
                              ->orderBy('category')
                              ->pluck('category');
 
-        return view('products.index', compact('products', 'categories'));
+        return view('products.index', compact('products', 'categories', 'selectedProduct'));
     }
 
     public function create()

@@ -12,7 +12,7 @@
                         <a href="{{ route('admin.products.index') }}" class="text-decoration-none small" style="color: var(--btn-bg);">
                             <i class="fas fa-arrow-left me-1"></i> {{ __('Retour à la liste') }}
                         </a>
-                        <h2 class="brand-font fw-bold mt-2 mb-1">{{ __('Modifier le Produit') }} ✏️</h2>
+                        <h2 class="brand-font fw-bold mt-2 mb-1">{{ __('Modifier le Produit') }} <i class="fas fa-edit ms-2 text-success"></i></h2>
                         <p class="opacity-75">{{ __('Mettez à jour les informations du produit.') }}</p>
                     </div>
 

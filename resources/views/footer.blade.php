@@ -3,7 +3,7 @@
         <div class="row g-4 mb-5">
             <!-- Branding -->
             <div class="col-lg-4">
-                <h4 class="brand-font fw-bold mb-3">🌿 {{ __('Guide Gluten-Free') }}</h4>
+                <h4 class="brand-font fw-bold mb-3"><i class="fas fa-leaf me-2 text-success"></i>{{ __('Guide Gluten-Free') }}</h4>
                 <p class="opacity-75 mb-4" style="max-width: 300px;">
                     {{ __('Votre référence pour une vie sans gluten au Maroc. Trouvez, partagez et savourez en toute sécurité.') }}
                 </p>

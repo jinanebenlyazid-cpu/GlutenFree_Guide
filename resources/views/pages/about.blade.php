@@ -142,11 +142,23 @@
 <style>
     .text-gradient { background: linear-gradient(90deg, var(--btn-bg), #6b8e23); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     .shadow-2xl { box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15); }
-    .glass-hover { background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(10px); transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); border: 1px solid rgba(0,0,0,0.05); }
+    .bg-main { background-color: var(--btn-bg) !important; }
+    .glass-hover { background: rgba(255, 255, 255, 0.86); backdrop-filter: blur(10px); transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); border: 1px solid rgba(0,0,0,0.05); color: var(--text-main); }
+    .glass-hover h4,
+    .glass-hover p { color: var(--text-main); }
     .glass-hover:hover { transform: translateY(-15px); background: var(--card-bg); box-shadow: 0 30px 60px rgba(0,0,0,0.1) !important; border-color: var(--border-color); }
     .icon-wrapper { width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; background: var(--bg-soft); color: var(--btn-bg); border-radius: 20px; transition: 0.3s; }
+    .icon-wrapper.bg-main { background-color: var(--btn-bg) !important; color: #fff !important; }
     .glass-hover:hover .icon-wrapper { transform: rotate(10deg); }
     .about-card.highlighted { border: 2px solid var(--btn-bg) !important; }
+    [data-bs-theme="dark"] .glass-hover { background: rgba(26, 31, 26, 0.96); border-color: var(--border-color); box-shadow: 0 18px 40px rgba(0,0,0,0.28) !important; }
+    [data-bs-theme="dark"] .glass-hover:hover { background: #202720; box-shadow: 0 28px 58px rgba(0,0,0,0.42) !important; }
+    [data-bs-theme="dark"] .glass-hover h4,
+    [data-bs-theme="dark"] .glass-hover p,
+    [data-bs-theme="dark"] .glass-hover .btn-soft-secondary { color: #f1f5ef !important; }
+    [data-bs-theme="dark"] .glass-hover p { opacity: 0.82 !important; }
+    [data-bs-theme="dark"] .icon-wrapper { background: #0f150f; color: var(--btn-hover); }
+    [data-bs-theme="dark"] .icon-wrapper.bg-main { background: var(--btn-bg) !important; color: #fff !important; }
     .icon-circle { width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
     .glass-float { position: absolute; bottom: 30px; left: -20px; background: var(--glass-bg); backdrop-filter: blur(12px); min-width: 200px; animation: float 6s ease-in-out infinite; }
     @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
@@ -160,4 +172,3 @@
     .scale-hover:hover { transform: scale(1.05); }
 </style>
 @endsection
-

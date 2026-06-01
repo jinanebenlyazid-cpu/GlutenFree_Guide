@@ -20,7 +20,7 @@
                             <div class="bg-soft d-inline-flex align-items-center justify-content-center rounded-circle mb-3 shadow-inner" style="width: 70px; height: 70px;">
                                 <i class="fas fa-user-plus text-success fs-3"></i>
                             </div>
-                            <h2 class="brand-font fw-bold text-main mb-2">{{ __('Rejoignez-nous') }} 🌿</h2>
+                            <h2 class="brand-font fw-bold text-main mb-2">{{ __('Rejoignez-nous') }} <i class="fas fa-leaf ms-2 text-success"></i></h2>
                             <p class="opacity-75 text-main">{{ __('Créez votre compte pour sauvegarder vos lieux et recettes favoris.') }}</p>
                         </div>
 

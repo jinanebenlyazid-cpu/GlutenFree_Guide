@@ -13,7 +13,7 @@
                         <li class="breadcrumb-item active" aria-current="page">{{ __('Recettes') }}</li>
                     </ol>
                 </nav>
-                <h1 class="brand-font fw-bold mb-0">{{ __('Gestion des Recettes') }} 👩‍🍳</h1>
+                <h1 class="brand-font fw-bold mb-0">{{ __('Gestion des Recettes') }} <i class="fas fa-utensils ms-2 text-success"></i></h1>
             </div>
         </div>
 
@@ -112,7 +112,7 @@
                                         <a href="{{ route('admin.recipes.edit', $recipe->id) }}" class="btn btn-sm btn-outline-primary rounded-circle shadow-sm d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;" title="{{ __('Modifier') }}">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <form action="{{ route('admin.recipes.destroy', $recipe->id) }}" method="POST" onsubmit="return confirm('{{ __('Supprimer définitivement cette recette ?') }}')">
+                                        <form action="{{ route('admin.recipes.destroy', $recipe->id) }}" method="POST" class="d-inline confirm-form" data-confirm="{{ __('Supprimer définitivement cette recette ?') }}">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-sm btn-outline-danger rounded-circle shadow-sm d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;" title="{{ __('Supprimer') }}">

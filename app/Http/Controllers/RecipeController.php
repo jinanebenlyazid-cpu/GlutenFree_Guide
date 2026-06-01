@@ -17,26 +17,31 @@ class RecipeController extends Controller implements HasMiddleware
 
     public function index(Request $request)
     {
-        $query = Recipe::approved();
+        try {
+            $query = Recipe::approved();
 
-        if ($request->filled('search')) {
-            $search = $request->search;
-            $query->where(function($q) use ($search) {
-                $q->where('name', 'like', '%' . $search . '%')
-                  ->orWhere('ingredients', 'like', '%' . $search . '%');
-            });
+            if ($request->filled('search')) {
+                $search = $request->search;
+                $query->where(function($q) use ($search) {
+                    $q->where('name', 'like', '%' . $search . '%')
+                      ->orWhere('ingredients', 'like', '%' . $search . '%');
+                });
+            }
+
+            if ($request->filled('difficulty')) {
+                $query->where('difficulty', $request->difficulty);
+            }
+
+            if ($request->filled('max_time')) {
+                $query->where('prep_time', '<=', $request->max_time);
+            }
+
+            $recipes = $query->with(['comments.user', 'comments.replies.user', 'user'])->latest()->paginate(5)->withQueryString();
+            return view('recipes.index', compact('recipes'));
+        } catch (\Throwable $e) {
+            file_put_contents(storage_path('logs/debug_error.log'), $e->getMessage() . "\n" . $e->getTraceAsString());
+            throw $e;
         }
-
-        if ($request->filled('difficulty')) {
-            $query->where('difficulty', $request->difficulty);
-        }
-
-        if ($request->filled('max_time')) {
-            $query->where('prep_time', '<=', $request->max_time);
-        }
-
-        $recipes = $query->with(['comments.user', 'user'])->latest()->paginate(5)->withQueryString();
-        return view('recipes.index', compact('recipes'));
     }
 
     public function myRecipes(Request $request)
@@ -52,7 +57,7 @@ class RecipeController extends Controller implements HasMiddleware
             });
         }
 
-        $recipes = $query->with(['comments.user', 'user'])->latest()->paginate(5)->withQueryString();
+        $recipes = $query->with(['comments.user', 'comments.replies.user', 'user'])->latest()->paginate(5)->withQueryString();
         return view('recipes.my', compact('recipes'));
     }
 

@@ -16,7 +16,7 @@
                 <div class="gift-ribbon"></div>
             </div>
             <div class="gift-content">
-                <div class="mission-badge mb-2">🎁 {{ __('Mission du jour') }}</div>
+                <div class="mission-badge mb-2"><i class="fas fa-gift me-2"></i>{{ __('Mission du jour') }}</div>
                 <h3 class="brand-font fw-bold text-white mb-3" x-text="mission.title"></h3>
                 <p class="text-white opacity-90 fs-5 mb-4" x-text="mission.description"></p>
                 <button @click="close()" class="btn btn-light rounded-pill px-5 fw-bold shadow-lg py-2">
