@@ -171,7 +171,7 @@
                             <a href="{{ route('login') }}"
                                 class="nav-link fw-bold align-self-center px-3">{{ __('Connexion') }}</a>
                             <a href="{{ route('register') }}"
-                                class="btn btn-main d-none d-md-block">{{ __("S'inscrire") }}</a>
+                                class="btn btn-main">{{ __("S'inscrire") }}</a>
                         </div>
                     @endauth
                 </div>
