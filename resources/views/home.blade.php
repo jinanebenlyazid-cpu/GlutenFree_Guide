@@ -48,13 +48,13 @@
             <div class="col-lg-6 position-relative ps-lg-5" data-aos="fade-left" data-aos-delay="100">
                 <div class="position-relative">
                     <!-- Decorative Elements -->
-                    <div class="position-absolute rounded-circle bg-success opacity-10 blur-3xl" style="top: -50px; right: -50px; width: 300px; height: 300px; filter: blur(80px);"></div>
+                    <div class="hero-glow position-absolute rounded-circle bg-success opacity-10 blur-3xl" style="top: -50px; right: -50px; width: 300px; height: 300px; filter: blur(80px);"></div>
                     
                     <!-- Main Image with mask -->
-                    <div class="rounded-4 shadow-2xl overflow-hidden" style="transform: skewY(-2deg);">
+                    <div class="hero-image-frame rounded-4 shadow-2xl overflow-hidden" style="transform: skewY(-2deg);">
                         <img src="https://www.greenvillage.ma/vyckungy/2021/09/241643826_4356507334430213_1831067547250777849_n.jpg" 
                              alt="{{ __('Plat sans gluten') }}" 
-                             class="img-fluid" 
+                             class="hero-image img-fluid" 
                              style="object-fit: cover; height: 550px; width: 100%; transform: skewY(2deg) scale(1.1);">
                     </div>
                     
@@ -203,5 +203,109 @@
     .feature-card-link:hover .card { box-shadow: 0 18px 35px rgba(0, 0, 0, 0.12) !important; }
     .feature-card-link:focus-visible .card { outline: 3px solid rgba(107, 142, 35, 0.35); outline-offset: 4px; }
     .hero { background: radial-gradient(circle at 10% 20%, rgba(45, 90, 39, 0.03) 0%, transparent 40%); }
+
+    .hero,
+    .hero .container,
+    .hero .row,
+    .hero [class*="col-"] {
+        min-width: 0;
+    }
+
+    @media (max-width: 767.98px) {
+        .hero {
+            padding-top: 1.5rem !important;
+            padding-bottom: 2.5rem !important;
+        }
+
+        .hero .container {
+            margin-top: 0 !important;
+            padding-top: 1.5rem !important;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        .hero .badge {
+            max-width: 100%;
+            white-space: normal;
+            line-height: 1.35;
+            padding-left: .85rem !important;
+            padding-right: .85rem !important;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.45rem, 12vw, 3.35rem);
+            line-height: .98 !important;
+        }
+
+        .hero .lead {
+            font-size: 1.08rem;
+            line-height: 1.65;
+            padding-right: 0 !important;
+        }
+
+        .hero .btn {
+            width: 100%;
+            min-height: 56px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero .glass.d-inline-flex {
+            width: min(100%, 360px);
+            gap: 0 !important;
+            justify-content: space-between !important;
+            padding: .85rem !important;
+        }
+
+        .hero .glass.d-inline-flex > div {
+            flex: 1 1 0;
+            min-width: 0;
+            padding-left: .55rem !important;
+            padding-right: .55rem !important;
+        }
+
+        .hero .glass.d-inline-flex h3 {
+            font-size: 1.45rem;
+        }
+
+        .hero .glass.d-inline-flex small {
+            display: block;
+            font-size: .82rem;
+            white-space: normal;
+        }
+
+        .hero .col-lg-6.position-relative {
+            padding-left: .75rem !important;
+            padding-right: .75rem !important;
+        }
+
+        .hero-glow {
+            display: none;
+        }
+
+        .hero-image-frame {
+            transform: none !important;
+            border-radius: 1.25rem !important;
+            max-width: 100%;
+        }
+
+        .hero-image {
+            height: 310px !important;
+            width: 100% !important;
+            max-width: 100%;
+            transform: none !important;
+        }
+    }
+
+    @media (max-width: 420px) {
+        .hero h1 {
+            font-size: clamp(2.15rem, 11vw, 2.8rem);
+        }
+
+        .hero .glass.d-inline-flex {
+            width: 100%;
+        }
+    }
 </style>
 @endsection

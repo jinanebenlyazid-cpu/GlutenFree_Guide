@@ -58,12 +58,24 @@
             --glass-bg: rgba(26, 31, 26, 0.85);
         }
 
+        html,
+        body {
+            max-width: 100%;
+            overflow-x: clip;
+        }
+
         body {
             font-family: 'Outfit', sans-serif;
             background-color: var(--bg-body);
             color: var(--text-main);
             transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             overflow-x: hidden;
+        }
+
+        main,
+        #swup {
+            max-width: 100%;
+            overflow-x: clip;
         }
 
         h1,
@@ -142,6 +154,319 @@
 
         .text-main {
             color: var(--text-main) !important;
+        }
+
+        .btn-light,
+        .btn-light.text-main {
+            color: #1a1f1a !important;
+        }
+
+        .btn-light:hover,
+        .btn-light:focus,
+        .btn-light.text-main:hover,
+        .btn-light.text-main:focus {
+            color: var(--btn-bg) !important;
+            background-color: #ffffff;
+            border-color: #ffffff;
+        }
+
+        .form-control {
+            color: var(--text-main);
+        }
+
+        .form-control::placeholder {
+            color: color-mix(in srgb, var(--text-main) 48%, transparent);
+            opacity: 1;
+        }
+
+        .glass-input {
+            background: color-mix(in srgb, var(--card-bg) 82%, transparent);
+        }
+
+        .glass-input:focus-within {
+            border-color: var(--btn-bg) !important;
+            box-shadow: 0 0 0 4px rgba(45, 90, 39, 0.12) !important;
+        }
+
+        [data-bs-theme="dark"] .glass-input {
+            background: #101510;
+        }
+
+        html[data-bs-theme="dark"] body .glass-input:focus-within {
+            background: #101510 !important;
+            border-color: var(--btn-hover) !important;
+            box-shadow: 0 0 0 4px rgba(93, 176, 77, 0.16) !important;
+        }
+
+        [data-bs-theme="dark"] .glass-input .form-control,
+        [data-bs-theme="dark"] .glass-input .input-group-text,
+        [data-bs-theme="dark"] .glass-input i {
+            color: #f1f5ef !important;
+        }
+
+        [data-bs-theme="dark"] .glass-input .form-control::placeholder {
+            color: rgba(241, 245, 239, 0.62);
+        }
+
+        .form-select {
+            min-height: 48px;
+            border-color: var(--border-color) !important;
+            border-radius: 999px;
+            background-color: var(--card-bg) !important;
+            color: var(--text-main) !important;
+            padding: 0.65rem 3rem 0.65rem 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+            transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
+            appearance: none;
+            -webkit-appearance: none;
+            background-image:
+                linear-gradient(45deg, transparent 50%, var(--text-main) 50%),
+                linear-gradient(135deg, var(--text-main) 50%, transparent 50%);
+            background-position:
+                calc(100% - 22px) 50%,
+                calc(100% - 14px) 50%;
+            background-size: 8px 8px, 8px 8px;
+            background-repeat: no-repeat;
+        }
+
+        .form-select:hover {
+            border-color: color-mix(in srgb, var(--btn-bg) 55%, var(--border-color)) !important;
+            box-shadow: 0 6px 18px rgba(45, 90, 39, 0.08);
+        }
+
+        .form-select:focus {
+            background-color: var(--card-bg) !important;
+            border-color: var(--btn-bg) !important;
+            color: var(--text-main) !important;
+            box-shadow: 0 0 0 4px rgba(45, 90, 39, 0.14) !important;
+            outline: none;
+        }
+
+        .form-select option {
+            background-color: var(--card-bg);
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        .form-select option:checked {
+            background: linear-gradient(135deg, var(--btn-bg), var(--btn-hover));
+            color: #fff;
+        }
+
+        .form-select option:disabled {
+            color: color-mix(in srgb, var(--text-main) 45%, transparent);
+        }
+
+        .input-group .form-select {
+            min-height: 44px;
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        .input-group.rounded-pill .form-select,
+        .glass-input.rounded-pill .form-select {
+            border-top-right-radius: 999px;
+            border-bottom-right-radius: 999px;
+        }
+
+        [dir="rtl"] .form-select {
+            padding-right: 1.1rem;
+            padding-left: 3rem;
+            background-position:
+                22px 50%,
+                14px 50%;
+        }
+
+        .ggf-select-host {
+            overflow: visible !important;
+        }
+
+        .ggf-native-select {
+            position: absolute !important;
+            width: 1px !important;
+            height: 1px !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+            margin: 0 !important;
+        }
+
+        .ggf-select {
+            position: relative;
+            flex: 1 1 auto;
+            width: 100%;
+            min-width: 0;
+            z-index: 2;
+        }
+
+        .ggf-select-trigger {
+            width: 100%;
+            min-height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 999px;
+            background: var(--card-bg);
+            color: var(--text-main);
+            padding: 0.65rem 1rem 0.65rem 1.1rem;
+            font: inherit;
+            font-weight: 500;
+            text-align: start;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+            transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
+        }
+
+        .ggf-select-trigger:hover {
+            border-color: color-mix(in srgb, var(--btn-bg) 55%, var(--border-color));
+            box-shadow: 0 6px 18px rgba(45, 90, 39, 0.08);
+        }
+
+        .ggf-select-trigger:disabled {
+            cursor: not-allowed;
+            opacity: .62;
+        }
+
+        .ggf-native-select.is-invalid + .ggf-select .ggf-select-trigger {
+            border-color: var(--bs-form-invalid-border-color, #dc3545);
+        }
+
+        .ggf-select.open .ggf-select-trigger,
+        .ggf-select-trigger:focus {
+            border-color: var(--btn-bg);
+            box-shadow: 0 0 0 4px rgba(45, 90, 39, 0.14);
+            outline: none;
+        }
+
+        .ggf-select-value {
+            min-width: 0;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .ggf-select-icon {
+            flex: 0 0 auto;
+            font-size: .85rem;
+            opacity: .76;
+            transition: transform .2s ease;
+        }
+
+        .ggf-select.open .ggf-select-icon {
+            transform: rotate(180deg);
+        }
+
+        .ggf-select-menu {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: calc(100% + 8px);
+            z-index: 1060;
+            max-height: 260px;
+            overflow-y: auto;
+            list-style: none;
+            margin: 0;
+            padding: .35rem;
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            background: var(--card-bg);
+            color: var(--text-main);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.16);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-6px) scale(.98);
+            transform-origin: top center;
+            transition: opacity .16s ease, transform .16s ease, visibility .16s ease;
+        }
+
+        .ggf-select.open .ggf-select-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+        .ggf-select-option {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: .65rem;
+            border: 0;
+            border-radius: 12px;
+            background: transparent;
+            color: var(--text-main);
+            padding: .62rem .8rem;
+            font: inherit;
+            font-weight: 500;
+            text-align: start;
+            cursor: pointer;
+            transition: background-color .15s ease, color .15s ease, transform .15s ease;
+        }
+
+        .ggf-select-option:hover,
+        .ggf-select-option:focus {
+            background: var(--bg-soft);
+            color: var(--btn-bg);
+            outline: none;
+        }
+
+        .ggf-select-option.is-selected {
+            background: linear-gradient(135deg, var(--btn-bg), var(--btn-hover));
+            color: #fff;
+            box-shadow: 0 8px 18px rgba(45, 90, 39, 0.18);
+        }
+
+        .ggf-select-option.is-disabled {
+            cursor: not-allowed;
+            opacity: .5;
+        }
+
+        .ggf-select-check {
+            width: 1rem;
+            flex: 0 0 1rem;
+            opacity: 0;
+        }
+
+        .ggf-select-option.is-selected .ggf-select-check {
+            opacity: 1;
+        }
+
+        .input-group .ggf-select-trigger,
+        .glass-input.rounded-pill .ggf-select-trigger {
+            min-height: 44px;
+            border: 0;
+            box-shadow: none;
+            background: transparent;
+        }
+
+        .input-group .ggf-select.open .ggf-select-trigger,
+        .glass-input.rounded-pill .ggf-select.open .ggf-select-trigger,
+        .input-group .ggf-select-trigger:focus,
+        .glass-input.rounded-pill .ggf-select-trigger:focus {
+            box-shadow: none;
+        }
+
+        [data-bs-theme="dark"] .ggf-select-trigger,
+        [data-bs-theme="dark"] .ggf-select-menu {
+            background: #101510;
+            border-color: #3b483b;
+            color: #f1f5ef;
+        }
+
+        [data-bs-theme="dark"] .ggf-select-option {
+            color: #f1f5ef;
+        }
+
+        [data-bs-theme="dark"] .ggf-select-option:hover,
+        [data-bs-theme="dark"] .ggf-select-option:focus {
+            background: #202720;
+            color: var(--btn-hover);
+        }
+
+        [data-bs-theme="dark"] .ggf-select-option.is-selected {
+            color: #fff;
         }
 
         /* Custom Scrollbar */
@@ -624,6 +949,174 @@
             if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
                 document.documentElement.setAttribute('data-bs-theme', 'dark');
             }
+        })();
+    </script>
+    <script>
+        (function () {
+            function shouldEnhanceSelect(select) {
+                return select instanceof HTMLSelectElement
+                    && select.classList.contains('form-select')
+                    && !select.classList.contains('d-none')
+                    && !select.classList.contains('ggf-native-select')
+                    && !select.hidden
+                    && !select.multiple
+                    && !select.size
+                    && !select.dataset.nativeSelect;
+            }
+
+            function closeSelect(customSelect) {
+                customSelect.classList.remove('open');
+                customSelect.querySelector('.ggf-select-trigger')?.setAttribute('aria-expanded', 'false');
+            }
+
+            function closeAllSelects(except = null) {
+                document.querySelectorAll('.ggf-select.open').forEach((customSelect) => {
+                    if (customSelect !== except) closeSelect(customSelect);
+                });
+            }
+
+            function updateCustomSelect(select, customSelect) {
+                const selectedOption = select.options[select.selectedIndex] || select.options[0];
+                const valueNode = customSelect.querySelector('.ggf-select-value');
+                if (valueNode && selectedOption) {
+                    valueNode.textContent = selectedOption.textContent.trim();
+                }
+
+                customSelect.querySelectorAll('.ggf-select-option').forEach((button) => {
+                    const isSelected = button.dataset.value === select.value;
+                    button.classList.toggle('is-selected', isSelected);
+                    button.setAttribute('aria-selected', isSelected ? 'true' : 'false');
+                });
+            }
+
+            function enhanceSelect(select) {
+                if (!shouldEnhanceSelect(select)) return;
+
+                select.classList.add('ggf-native-select');
+                select.closest('.glass-input, .input-group')?.classList.add('ggf-select-host');
+
+                const customSelect = document.createElement('div');
+                customSelect.className = 'ggf-select';
+
+                const trigger = document.createElement('button');
+                trigger.type = 'button';
+                trigger.className = 'ggf-select-trigger';
+                trigger.setAttribute('aria-haspopup', 'listbox');
+                trigger.setAttribute('aria-expanded', 'false');
+                trigger.disabled = select.disabled;
+
+                const value = document.createElement('span');
+                value.className = 'ggf-select-value';
+
+                const icon = document.createElement('span');
+                icon.className = 'ggf-select-icon';
+                icon.innerHTML = '<i class="fas fa-chevron-down" aria-hidden="true"></i>';
+
+                trigger.append(value, icon);
+
+                const menu = document.createElement('ul');
+                menu.className = 'ggf-select-menu';
+                menu.setAttribute('role', 'listbox');
+
+                Array.from(select.options).forEach((option) => {
+                    const item = document.createElement('li');
+                    const button = document.createElement('button');
+                    button.type = 'button';
+                    button.className = 'ggf-select-option';
+                    button.dataset.value = option.value;
+                    button.setAttribute('role', 'option');
+                    button.disabled = option.disabled;
+
+                    if (option.disabled) {
+                        button.classList.add('is-disabled');
+                    }
+
+                    const check = document.createElement('span');
+                    check.className = 'ggf-select-check';
+                    check.innerHTML = '<i class="fas fa-check" aria-hidden="true"></i>';
+
+                    const label = document.createElement('span');
+                    label.textContent = option.textContent.trim();
+
+                    button.append(check, label);
+                    button.addEventListener('click', () => {
+                        if (option.disabled) return;
+                        select.value = option.value;
+                        select.dispatchEvent(new Event('change', { bubbles: true }));
+                        updateCustomSelect(select, customSelect);
+                        closeSelect(customSelect);
+                        trigger.focus();
+                    });
+
+                    item.appendChild(button);
+                    menu.appendChild(item);
+                });
+
+                trigger.addEventListener('click', () => {
+                    const willOpen = !customSelect.classList.contains('open');
+                    closeAllSelects(customSelect);
+                    customSelect.classList.toggle('open', willOpen);
+                    trigger.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+                });
+
+                trigger.addEventListener('keydown', (event) => {
+                    if (event.key === 'Escape') {
+                        closeSelect(customSelect);
+                    }
+
+                    if (event.key === 'ArrowDown' || event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        customSelect.classList.add('open');
+                        trigger.setAttribute('aria-expanded', 'true');
+                        customSelect.querySelector('.ggf-select-option.is-selected:not(:disabled), .ggf-select-option:not(:disabled)')?.focus();
+                    }
+                });
+
+                menu.addEventListener('keydown', (event) => {
+                    const options = Array.from(menu.querySelectorAll('.ggf-select-option:not(:disabled)'));
+                    const currentIndex = options.indexOf(document.activeElement);
+
+                    if (event.key === 'Escape') {
+                        closeSelect(customSelect);
+                        trigger.focus();
+                    }
+
+                    if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+                        event.preventDefault();
+                        const direction = event.key === 'ArrowDown' ? 1 : -1;
+                        const nextIndex = (currentIndex + direction + options.length) % options.length;
+                        options[nextIndex]?.focus();
+                    }
+                });
+
+                select.addEventListener('change', () => updateCustomSelect(select, customSelect));
+                select.addEventListener('invalid', () => {
+                    trigger.focus();
+                    customSelect.classList.add('open');
+                    trigger.setAttribute('aria-expanded', 'true');
+                });
+
+                select.form?.addEventListener('reset', () => {
+                    window.setTimeout(() => updateCustomSelect(select, customSelect), 0);
+                });
+
+                customSelect.append(trigger, menu);
+                select.insertAdjacentElement('afterend', customSelect);
+                updateCustomSelect(select, customSelect);
+            }
+
+            function enhanceAllSelects(root = document) {
+                root.querySelectorAll('select.form-select').forEach(enhanceSelect);
+            }
+
+            document.addEventListener('DOMContentLoaded', () => enhanceAllSelects());
+            document.addEventListener('click', (event) => {
+                if (!event.target.closest('.ggf-select')) closeAllSelects();
+            });
+            document.addEventListener('focusin', (event) => {
+                if (!event.target.closest('.ggf-select')) closeAllSelects();
+            });
+            window.GuideGlutenFreeEnhanceSelects = enhanceAllSelects;
         })();
     </script>
 </head>
