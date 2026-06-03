@@ -13,7 +13,7 @@
                 <p class="opacity-75 mb-0" style="color: var(--text-main);">{{ __('Gérez les recettes, produits et lieux du site.') }}</p>
             </div>
             <div class="col-md-6 text-md-end mt-3 mt-md-0">
-                <div class="d-flex gap-2 justify-content-md-end">
+                <div class="admin-dashboard-actions">
                     <a href="{{ route('admin.products.index') }}" class="btn btn-outline-primary rounded-pill px-4 btn-sm fw-bold">
                         <i class="fas fa-box me-2"></i> {{ __('Produits') }}
                     </a>
@@ -191,4 +191,49 @@
         </div>
     </div>
 </section>
+
+<style>
+    .admin-dashboard-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: .5rem;
+        justify-content: flex-end;
+    }
+
+    .admin-dashboard-actions .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 42px;
+        white-space: nowrap;
+    }
+
+    @media (max-width: 767.98px) {
+        .admin-dashboard-actions {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            justify-content: stretch;
+            width: 100%;
+        }
+
+        .admin-dashboard-actions .btn {
+            width: 100%;
+            min-width: 0;
+            padding-left: .75rem !important;
+            padding-right: .75rem !important;
+            white-space: normal;
+            line-height: 1.15;
+        }
+
+        .admin-dashboard-actions .btn i {
+            margin-right: .35rem !important;
+        }
+    }
+
+    @media (max-width: 360px) {
+        .admin-dashboard-actions {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
 @endsection
