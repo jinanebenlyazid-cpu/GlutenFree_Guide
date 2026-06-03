@@ -36,7 +36,7 @@ class RecipeController extends Controller implements HasMiddleware
                 $query->where('prep_time', '<=', $request->max_time);
             }
 
-            $recipes = $query->with(['comments.user', 'comments.replies.user', 'user'])->latest()->paginate(5)->withQueryString();
+            $recipes = $query->with(['comments.user', 'comments.replies.user', 'user'])->latest()->paginate(8)->withQueryString();
             return view('recipes.index', compact('recipes'));
         } catch (\Throwable $e) {
             file_put_contents(storage_path('logs/debug_error.log'), $e->getMessage() . "\n" . $e->getTraceAsString());
